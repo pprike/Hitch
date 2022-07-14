@@ -2,7 +2,7 @@
 //  HitchUITestsLaunchTests.swift
 //  HitchUITests
 //
-//  Created by Aayushi Luhar on 2022-06-19.
+//  Created by Yash Shah on 2022-06-19.
 //
 
 import XCTest

@@ -17,6 +17,8 @@
 		476AF395285EE312001DABFF /* HitchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF394285EE312001DABFF /* HitchTests.swift */; };
 		476AF39F285EE312001DABFF /* HitchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF39E285EE312001DABFF /* HitchUITests.swift */; };
 		476AF3A1285EE312001DABFF /* HitchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF3A0285EE312001DABFF /* HitchUITestsLaunchTests.swift */; };
+		47B198B5287E46270006C3D4 /* packageDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B198B4287E46260006C3D4 /* packageDetailsViewController.swift */; };
+		47B198B7287EA7940006C3D4 /* OrderReviewAndPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B198B6287EA7940006C3D4 /* OrderReviewAndPaymentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		476AF39A285EE312001DABFF /* HitchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		476AF39E285EE312001DABFF /* HitchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitchUITests.swift; sourceTree = "<group>"; };
 		476AF3A0285EE312001DABFF /* HitchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitchUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		47B198B4287E46260006C3D4 /* packageDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = packageDetailsViewController.swift; sourceTree = "<group>"; };
+		47B198B6287EA7940006C3D4 /* OrderReviewAndPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderReviewAndPaymentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 				476AF386285EE312001DABFF /* Assets.xcassets */,
 				476AF38B285EE312001DABFF /* Info.plist */,
 				476AF383285EE30F001DABFF /* Hitch.xcdatamodeld */,
+				47B198B4287E46260006C3D4 /* packageDetailsViewController.swift */,
+				47B198B6287EA7940006C3D4 /* OrderReviewAndPaymentViewController.swift */,
 			);
 			path = Hitch;
 			sourceTree = "<group>";
@@ -269,6 +275,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47B198B7287EA7940006C3D4 /* OrderReviewAndPaymentViewController.swift in Sources */,
+				47B198B5287E46270006C3D4 /* packageDetailsViewController.swift in Sources */,
 				476AF37F285EE30F001DABFF /* ViewController.swift in Sources */,
 				476AF37B285EE30F001DABFF /* AppDelegate.swift in Sources */,
 				476AF385285EE30F001DABFF /* Hitch.xcdatamodeld in Sources */,
@@ -449,6 +457,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 59Z3S2L2B4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hitch/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -461,7 +470,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.Hitch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.Hitchh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -476,6 +485,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 59Z3S2L2B4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hitch/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -488,7 +498,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.Hitch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.Hitchh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
