@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4733ACB6288FB3340024BA39 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733ACB5288FB3340024BA39 /* SignUpViewController.swift */; };
+		4733ACB8288FD0270024BA39 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733ACB7288FD0270024BA39 /* LoginViewController.swift */; };
 		476AF37B285EE30F001DABFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF37A285EE30F001DABFF /* AppDelegate.swift */; };
 		476AF37D285EE30F001DABFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF37C285EE30F001DABFF /* SceneDelegate.swift */; };
 		476AF37F285EE30F001DABFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF37E285EE30F001DABFF /* ViewController.swift */; };
@@ -17,6 +19,11 @@
 		476AF395285EE312001DABFF /* HitchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF394285EE312001DABFF /* HitchTests.swift */; };
 		476AF39F285EE312001DABFF /* HitchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF39E285EE312001DABFF /* HitchUITests.swift */; };
 		476AF3A1285EE312001DABFF /* HitchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF3A0285EE312001DABFF /* HitchUITestsLaunchTests.swift */; };
+		478E5B65288FA902007011E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 478E5B64288FA902007011E0 /* GoogleService-Info.plist */; };
+		478E5B68288FA9DE007011E0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 478E5B67288FA9DE007011E0 /* FirebaseAuth */; };
+		478E5B6A288FA9DE007011E0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 478E5B69288FA9DE007011E0 /* FirebaseDatabase */; };
+		478E5B6C288FA9DE007011E0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 478E5B6B288FA9DE007011E0 /* FirebaseFirestore */; };
+		478E5B6E288FA9DE007011E0 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 478E5B6D288FA9DE007011E0 /* FirebaseFunctions */; };
 		47B198B5287E46270006C3D4 /* packageDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B198B4287E46260006C3D4 /* packageDetailsViewController.swift */; };
 		47B198B7287EA7940006C3D4 /* OrderReviewAndPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B198B6287EA7940006C3D4 /* OrderReviewAndPaymentViewController.swift */; };
 		48A94600288224BE00E288F5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A945FF288224BE00E288F5 /* SearchViewController.swift */; };
@@ -42,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4733ACB5288FB3340024BA39 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4733ACB7288FD0270024BA39 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		476AF377285EE30F001DABFF /* Hitch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hitch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		476AF37A285EE30F001DABFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		476AF37C285EE30F001DABFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +65,7 @@
 		476AF39A285EE312001DABFF /* HitchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		476AF39E285EE312001DABFF /* HitchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitchUITests.swift; sourceTree = "<group>"; };
 		476AF3A0285EE312001DABFF /* HitchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitchUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		478E5B64288FA902007011E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		47B198B4287E46260006C3D4 /* packageDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = packageDetailsViewController.swift; sourceTree = "<group>"; };
 		47B198B6287EA7940006C3D4 /* OrderReviewAndPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderReviewAndPaymentViewController.swift; sourceTree = "<group>"; };
 		48A945FF288224BE00E288F5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +78,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				478E5B6A288FA9DE007011E0 /* FirebaseDatabase in Frameworks */,
+				478E5B68288FA9DE007011E0 /* FirebaseAuth in Frameworks */,
+				478E5B6C288FA9DE007011E0 /* FirebaseFirestore in Frameworks */,
+				478E5B6E288FA9DE007011E0 /* FirebaseFunctions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +132,7 @@
 				476AF37E285EE30F001DABFF /* ViewController.swift */,
 				476AF386285EE312001DABFF /* Assets.xcassets */,
 				476AF38B285EE312001DABFF /* Info.plist */,
+				478E5B64288FA902007011E0 /* GoogleService-Info.plist */,
 				476AF383285EE30F001DABFF /* Hitch.xcdatamodeld */,
 				47B198B4287E46260006C3D4 /* packageDetailsViewController.swift */,
 				47B198B6287EA7940006C3D4 /* OrderReviewAndPaymentViewController.swift */,
@@ -157,6 +172,8 @@
 			children = (
 				48A945FF288224BE00E288F5 /* SearchViewController.swift */,
 				48A946022883546B00E288F5 /* MapViewController.swift */,
+				4733ACB5288FB3340024BA39 /* SignUpViewController.swift */,
+				4733ACB7288FD0270024BA39 /* LoginViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -177,6 +194,12 @@
 			dependencies = (
 			);
 			name = Hitch;
+			packageProductDependencies = (
+				478E5B67288FA9DE007011E0 /* FirebaseAuth */,
+				478E5B69288FA9DE007011E0 /* FirebaseDatabase */,
+				478E5B6B288FA9DE007011E0 /* FirebaseFirestore */,
+				478E5B6D288FA9DE007011E0 /* FirebaseFunctions */,
+			);
 			productName = Hitch;
 			productReference = 476AF377285EE30F001DABFF /* Hitch.app */;
 			productType = "com.apple.product-type.application";
@@ -249,6 +272,9 @@
 				Base,
 			);
 			mainGroup = 476AF36E285EE30F001DABFF;
+			packageReferences = (
+				478E5B66288FA9DE007011E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 476AF378285EE30F001DABFF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -266,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				476AF38A285EE312001DABFF /* LaunchScreen.storyboard in Resources */,
+				478E5B65288FA902007011E0 /* GoogleService-Info.plist in Resources */,
 				476AF387285EE312001DABFF /* Assets.xcassets in Resources */,
 				476AF382285EE30F001DABFF /* Main.storyboard in Resources */,
 			);
@@ -292,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4733ACB6288FB3340024BA39 /* SignUpViewController.swift in Sources */,
 				48A9460528836DA800E288F5 /* DataModels.swift in Sources */,
 				47B198B7287EA7940006C3D4 /* OrderReviewAndPaymentViewController.swift in Sources */,
 				48A94600288224BE00E288F5 /* SearchViewController.swift in Sources */,
@@ -301,6 +329,7 @@
 				476AF385285EE30F001DABFF /* Hitch.xcdatamodeld in Sources */,
 				476AF37D285EE30F001DABFF /* SceneDelegate.swift in Sources */,
 				48A946032883546B00E288F5 /* MapViewController.swift in Sources */,
+				4733ACB8288FD0270024BA39 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +509,8 @@
 				DEVELOPMENT_TEAM = 59Z3S2L2B4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hitch/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Hitch wants to access your location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Hitch wants to access your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -490,7 +521,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.Hitchh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.Hitchapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -508,6 +539,8 @@
 				DEVELOPMENT_TEAM = 59Z3S2L2B4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hitch/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Hitch wants to access your location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Hitch wants to access your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -518,7 +551,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.Hitchh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.Hitchapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -638,6 +671,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		478E5B66288FA9DE007011E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		478E5B67288FA9DE007011E0 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E5B66288FA9DE007011E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		478E5B69288FA9DE007011E0 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E5B66288FA9DE007011E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		478E5B6B288FA9DE007011E0 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E5B66288FA9DE007011E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		478E5B6D288FA9DE007011E0 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E5B66288FA9DE007011E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		476AF383285EE30F001DABFF /* Hitch.xcdatamodeld */ = {
