@@ -13,6 +13,10 @@ class MapViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var pickupLocTxtF: UITextField!
+    
+    @IBOutlet weak var destLocTxtF: UITextField!
+    
     private var selectedTxtField : UITextField!
     
     private var srcMapItem : MKMapItem!
@@ -21,10 +25,7 @@ class MapViewController: UIViewController, UITextFieldDelegate {
     
     private var annotations = [MKAnnotation?](repeating: nil, count: 2)
         
-    @IBOutlet weak var pickupLocTxtF: UITextField!
-    
-    @IBOutlet weak var destLocTxtF: UITextField!
-    
+    private var orderDetails : Order!
     
     //Location manage to get the locations.
     let locationManager = CLLocationManager();
@@ -58,9 +59,23 @@ class MapViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if (segue.identifier == "SearchViewControllerSegue") {
+            
+            self.segueForSearchViewControllerSegue(segue, sender)
+            
+        } else if (segue.identifier == "OrderViewControllerSegue") {
+            
+            let orderView = segue.destination as! OrderViewController
+            orderView.orderDetails = self.orderDetails
+            
+        }
+    }
+    
+    func segueForSearchViewControllerSegue(_ segue: UIStoryboardSegue, _ sender: Any?) {
+        
         let destView = segue.destination as! SearchViewController
         destView.mapView = self.mapView
-        
         
         destView.callBack = { (mapItem: MKMapItem) in
             
@@ -101,6 +116,8 @@ class MapViewController: UIViewController, UITextFieldDelegate {
                     self.mapView.setVisibleMapRect(route.polyline.boundingMapRect,
                                                    edgePadding: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30),
                                                    animated: true)
+                                        
+                    self.orderDetails = Order(distance: route.distance, costPerDistanceUnit: 10 , taxAmount: 10, totalPrice: 10, eta: route.expectedTravelTime)
                 }
             }
         }
