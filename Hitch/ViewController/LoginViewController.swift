@@ -23,9 +23,9 @@ class LoginViewController: UIViewController {
         
         do{
             try Auth.auth().signOut()
-        }catch{
+        } catch{
             print(error.localizedDescription)
-        }
+         }
         }
     }
     
