@@ -65,9 +65,12 @@ class SignUpViewController: UIViewController {
                 uploadToFirebase(fileUrls: filePath, UID: user!.uid);
             }
 //            userCollection.addDocument(data: User.dictionary);
-            
+            var screen = "mainBottomNav";
+            if type=="Driver"{
+                screen = "driverMainTab"
+            }
             let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
-            let vc = mainStoryboard.instantiateViewController(withIdentifier: "mainBottomNav")
+            let vc = mainStoryboard.instantiateViewController(withIdentifier: screen)
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true);
         }
