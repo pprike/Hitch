@@ -64,9 +64,9 @@ class MapViewController: UIViewController, UITextFieldDelegate {
             
             self.segueForSearchViewControllerSegue(segue, sender)
             
-        } else if (segue.identifier == "OrderViewControllerSegue") {
+        } else if (segue.identifier == "PackageDetailsViewControllerSegue") {
             
-            let orderView = segue.destination as! OrderViewController
+            let orderView = segue.destination as! PackageDetailsViewController
             orderView.orderDetails = self.orderDetails
             
         }
@@ -117,7 +117,7 @@ class MapViewController: UIViewController, UITextFieldDelegate {
                                                    edgePadding: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30),
                                                    animated: true)
                                         
-                    self.orderDetails = Order(distance: route.distance, costPerDistanceUnit: 10 , taxAmount: 10, totalPrice: 10, eta: route.expectedTravelTime)
+                    self.orderDetails = Order(distance: route.distance, costPerDistanceUnit: 10 , taxAmount: 10, totalPrice: 10, eta: route.expectedTravelTime, packageDetails: Package(itemName: "", category: "", weight: 0.0, isFragile: false, count: 0, additionalDetails: "", size: ItemSize(length: 0.0, width: 0.0, height: 0.0)))
                 }
             }
         }
