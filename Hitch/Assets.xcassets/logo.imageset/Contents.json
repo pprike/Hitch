@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Screen Shot 2022-06-19 at 1.38.15 AM.png",
+      "filename" : " smLogo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Screen Shot 2022-06-19 at 1.38.15 AM-1.png",
+      "filename" : " smLogo-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Screen Shot 2022-06-19 at 1.38.15 AM-2.png",
+      "filename" : " smLogo-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

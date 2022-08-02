@@ -41,7 +41,20 @@ class LoginViewController: UIViewController {
     func checkLogin(){
         Auth.auth().signIn(withEmail: userEmail.text!, password: userPassword.text!) { authData, error in
             if let err = error{
-                print("Error: LC001  \(err.localizedDescription)")
+                print("Error: LC001  \(err.localizedDescription)");
+                let alert = UIAlertController(title: "Login Failed",
+                                              message: err.localizedDescription,
+                                              preferredStyle: .alert)
+
+                // 2. Creeate Actions
+                alert.addAction(UIAlertAction(title: "OK",
+                                              style: .default,
+                                              handler: { _ in
+                     print("OK tap")
+                }))
+
+                // 3. Snow
+                self.present(alert, animated: true, completion: nil)
                 return;
             }
 //            self.checkUserInfo();
@@ -60,6 +73,7 @@ class LoginViewController: UIViewController {
         if identifier == "login" {
             if Auth.auth().currentUser?.uid != nil {
                 print("User ID: \(Auth.auth().currentUser?.uid ?? "")");
+               
             return true;
         }
         }
