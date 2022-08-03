@@ -40,7 +40,7 @@ class PackageDetailsViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideKeyboardWhenTappedAround();
         categoryPicker.delegate = self
         categoryPicker.dataSource = self
     }

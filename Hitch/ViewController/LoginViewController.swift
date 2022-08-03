@@ -16,6 +16,10 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var userPassword: UITextField!
     
+    @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var loader: UIActivityIndicatorView!
+    let db = Firestore.firestore()
+    
     override func viewDidLoad() {
        
         self.hideKeyboardWhenTappedAround()
@@ -32,6 +36,9 @@ class LoginViewController: UIViewController {
     
 
     @IBAction func login(_ sender: Any) {
+        loginBtn.titleLabel?.text = ""
+        loader.isHidden = false;
+        
         if userEmail.text?.isEmpty == true || userPassword.text?.isEmpty == true{
         return
         }
@@ -57,28 +64,55 @@ class LoginViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
                 return;
             }
-//            self.checkUserInfo();
+            self.checkUserInfo();
         }
     }
 
-    func checkUserInfo()->Bool{
+    func checkUserInfo(){
         if Auth.auth().currentUser != nil {
             print(Auth.auth().currentUser?.uid ?? "");
-            return true;
+             getUserFromFirebase(uid:Auth.auth().currentUser!.uid);
+//            let defaults = UserDefaults.standard
+//            defaults.set(true, forKey: "isLoggedIn");
         }
-        return false;
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "login" {
-            if Auth.auth().currentUser?.uid != nil {
-                print("User ID: \(Auth.auth().currentUser?.uid ?? "")");
-               
-            return true;
+    func getUserFromFirebase(uid: String)  {
+        var screen = "mainBottomNav";
+        var type: String = "";
+        let docRef = db.collection("Users").document(uid)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+                type = document.get("userType") as! String;
+            } else {
+                print("Document does not exist")
+            }
+            if type == "Driver"{
+                screen = "driverMainTab"
+            }
+            let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
+            let vc = mainStoryboard.instantiateViewController(withIdentifier: screen)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true);
         }
-        }
-        return false;
+        
     }
+    
+    
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//        if identifier == "login" {
+//            if Auth.auth().currentUser?.uid != nil {
+//                print("User ID: \(Auth.auth().currentUser?.uid ?? "")");
+//
+//            return true;
+//        }
+//        }
+//        return false;
+//    }
+    
+    
 }
 
 extension UIViewController {

@@ -64,7 +64,7 @@ class SignUpViewController: UIViewController {
             if((filePath) != nil){
                 uploadToFirebase(fileUrls: filePath, UID: user!.uid);
             }
-//            userCollection.addDocument(data: User.dictionary);
+//          userCollection.addDocument(data: User.dictionary);
             var screen = "mainBottomNav";
             if type=="Driver"{
                 screen = "driverMainTab"
