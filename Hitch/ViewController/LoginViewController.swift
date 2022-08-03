@@ -32,8 +32,6 @@ class LoginViewController: UIViewController {
          }
         }
     }
-    
-    
 
     @IBAction func login(_ sender: Any) {
         loginBtn.titleLabel?.text = ""
@@ -45,7 +43,7 @@ class LoginViewController: UIViewController {
         checkLogin();
     }
     
-    func checkLogin(){
+    func checkLogin() {
         Auth.auth().signIn(withEmail: userEmail.text!, password: userPassword.text!) { authData, error in
             if let err = error{
                 print("Error: LC001  \(err.localizedDescription)");

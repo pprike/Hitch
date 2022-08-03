@@ -23,13 +23,17 @@
 		47B198B5287E46270006C3D4 /* PackageDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B198B4287E46260006C3D4 /* PackageDetailsViewController.swift */; };
 		47B198B7287EA7940006C3D4 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B198B6287EA7940006C3D4 /* OrderViewController.swift */; };
 		47B7D14C289752670022571A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B7D14B289752670022571A /* UserModel.swift */; };
+		4863A98F2898C1E7009A94B2 /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A98E2898C1E7009A94B2 /* TripViewController.swift */; };
+		4863A9912898D08E009A94B2 /* TripViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A9902898D08E009A94B2 /* TripViewCell.swift */; };
+		4863A9932898ED14009A94B2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A9922898ED14009A94B2 /* Constants.swift */; };
+		4863A9972899C42A009A94B2 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4863A9962899C42A009A94B2 /* FirebaseFirestoreSwift */; };
 		488D6026289103A800528EB2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 488D6025289103A800528EB2 /* FirebaseAuth */; };
 		488D6028289103A800528EB2 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 488D6027289103A800528EB2 /* FirebaseDatabase */; };
 		488D602A289103A800528EB2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 488D6029289103A800528EB2 /* FirebaseFirestore */; };
 		488D602F289103F300528EB2 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 488D602E289103F300528EB2 /* FirebaseFunctions */; };
 		48A94600288224BE00E288F5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A945FF288224BE00E288F5 /* SearchViewController.swift */; };
 		48A946032883546B00E288F5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A946022883546B00E288F5 /* MapViewController.swift */; };
-		48A9460528836DA800E288F5 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9460428836DA800E288F5 /* DataModels.swift */; };
+		48A9460528836DA800E288F5 /* OrderDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9460428836DA800E288F5 /* OrderDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,9 +73,12 @@
 		47B198B4287E46260006C3D4 /* PackageDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageDetailsViewController.swift; sourceTree = "<group>"; };
 		47B198B6287EA7940006C3D4 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		47B7D14B289752670022571A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		4863A98E2898C1E7009A94B2 /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
+		4863A9902898D08E009A94B2 /* TripViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewCell.swift; sourceTree = "<group>"; };
+		4863A9922898ED14009A94B2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		48A945FF288224BE00E288F5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		48A946022883546B00E288F5 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		48A9460428836DA800E288F5 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
+		48A9460428836DA800E288F5 /* OrderDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +91,7 @@
 				488D6026289103A800528EB2 /* FirebaseAuth in Frameworks */,
 				474DF2DF2898821C00A46037 /* FirebaseStorage in Frameworks */,
 				488D602A289103A800528EB2 /* FirebaseFirestore in Frameworks */,
+				4863A9972899C42A009A94B2 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,12 +140,14 @@
 				48A946012883541D00E288F5 /* ViewController */,
 				476AF3AD285EE373001DABFF /* Screen */,
 				476AF37A285EE30F001DABFF /* AppDelegate.swift */,
+				4863A9902898D08E009A94B2 /* TripViewCell.swift */,
 				476AF37C285EE30F001DABFF /* SceneDelegate.swift */,
 				476AF386285EE312001DABFF /* Assets.xcassets */,
 				476AF38B285EE312001DABFF /* Info.plist */,
 				478E5B64288FA902007011E0 /* GoogleService-Info.plist */,
 				476AF383285EE30F001DABFF /* Hitch.xcdatamodeld */,
-				48A9460428836DA800E288F5 /* DataModels.swift */,
+				48A9460428836DA800E288F5 /* OrderDataModel.swift */,
+				4863A9922898ED14009A94B2 /* Constants.swift */,
 			);
 			path = Hitch;
 			sourceTree = "<group>";
@@ -192,6 +202,7 @@
 				4733ACB7288FD0270024BA39 /* LoginViewController.swift */,
 				47B198B6287EA7940006C3D4 /* OrderViewController.swift */,
 				47B198B4287E46260006C3D4 /* PackageDetailsViewController.swift */,
+				4863A98E2898C1E7009A94B2 /* TripViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -218,6 +229,7 @@
 				488D6029289103A800528EB2 /* FirebaseFirestore */,
 				488D602E289103F300528EB2 /* FirebaseFunctions */,
 				474DF2DE2898821C00A46037 /* FirebaseStorage */,
+				4863A9962899C42A009A94B2 /* FirebaseFirestoreSwift */,
 			);
 			productName = Hitch;
 			productReference = 476AF377285EE30F001DABFF /* Hitch.app */;
@@ -341,14 +353,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				4733ACB6288FB3340024BA39 /* SignUpViewController.swift in Sources */,
-				48A9460528836DA800E288F5 /* DataModels.swift in Sources */,
+				48A9460528836DA800E288F5 /* OrderDataModel.swift in Sources */,
 				47B198B7287EA7940006C3D4 /* OrderViewController.swift in Sources */,
+				4863A9912898D08E009A94B2 /* TripViewCell.swift in Sources */,
 				48A94600288224BE00E288F5 /* SearchViewController.swift in Sources */,
 				47B198B5287E46270006C3D4 /* PackageDetailsViewController.swift in Sources */,
 				476AF37B285EE30F001DABFF /* AppDelegate.swift in Sources */,
 				476AF385285EE30F001DABFF /* Hitch.xcdatamodeld in Sources */,
 				476AF37D285EE30F001DABFF /* SceneDelegate.swift in Sources */,
 				48A946032883546B00E288F5 /* MapViewController.swift in Sources */,
+				4863A98F2898C1E7009A94B2 /* TripViewController.swift in Sources */,
+				4863A9932898ED14009A94B2 /* Constants.swift in Sources */,
 				47B7D14C289752670022571A /* UserModel.swift in Sources */,
 				4733ACB8288FD0270024BA39 /* LoginViewController.swift in Sources */,
 			);
@@ -727,6 +742,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 474DF2DD2898821C00A46037 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		4863A9962899C42A009A94B2 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E5B66288FA9DE007011E0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 		488D6025289103A800528EB2 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

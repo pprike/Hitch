@@ -47,7 +47,6 @@ class SignUpViewController: UIViewController {
         }
         signUp();
     }
-    
    
     func signUp() {
         Auth.auth().createUser(withEmail: userEmail.text!, password: password.text!) { [self] (authResult, error) in
@@ -74,8 +73,9 @@ class SignUpViewController: UIViewController {
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true);
         }
+        
     }
-    
+
     @IBAction func userTypeChanged(_ sender: Any) {
         if(userTypeControl.selectedSegmentIndex==1){
             uploadDocsBtn.isHidden = false;

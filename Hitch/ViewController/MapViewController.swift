@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import FirebaseAuth
 
 class MapViewController: UIViewController, UITextFieldDelegate {
 
@@ -50,6 +51,9 @@ class MapViewController: UIViewController, UITextFieldDelegate {
         //Initializing default location when app opens.
         let defaultLocation : [CLLocation] = [CLLocation(latitude: 43.466667, longitude: -80.516670)];
         locationManager(locationManager, didUpdateLocations: defaultLocation);
+        
+        orderDetails = Order()
+        orderDetails.userId = Auth.auth().currentUser!.uid
     }
 
     
@@ -82,10 +86,16 @@ class MapViewController: UIViewController, UITextFieldDelegate {
             self.mapView.removeOverlays(self.mapView.overlays)
             self.mapView.removeAnnotations(self.mapView.annotations)
             
+            let location = LocationDetails(lat: mapItem.placemark.coordinate.latitude,
+                                           long: mapItem.placemark.coordinate.longitude,
+                                           address: mapItem.placemark.title!)
+            
             if (self.selectedTxtField == self.pickupLocTxtF) {
                 self.srcMapItem = mapItem
+                self.orderDetails.pickupLocation = location
             } else {
                 self.destMapItem = mapItem
+                self.orderDetails.dropLocation = location
             }
             
             self.selectedTxtField.text = mapItem.placemark.title
@@ -117,7 +127,8 @@ class MapViewController: UIViewController, UITextFieldDelegate {
                                                    edgePadding: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30),
                                                    animated: true)
                                         
-                    self.orderDetails = Order(distance: route.distance, costPerDistanceUnit: 10 , taxAmount: 10, totalPrice: 10, eta: route.expectedTravelTime, packageDetails: Package(itemName: "", category: "", weight: 0.0, isFragile: false, count: 0, additionalDetails: "", size: ItemSize(length: 0.0, width: 0.0, height: 0.0)))
+                    self.orderDetails.distance = route.distance
+                    self.orderDetails.eta = route.expectedTravelTime
                 }
             }
         }

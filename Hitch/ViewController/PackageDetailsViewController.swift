@@ -36,13 +36,13 @@ class PackageDetailsViewController: UIViewController
     
     var selectedCategory: String = ""
     
-    let pickerData = ["Grocery / Food", "Home Furiture", "Outdoor Living", "Home Tools", "Electronics", "Office Supplies","Pet Care","Kids & Baby", "Small Appliances", "Clothing","Parcel","Documents", "Floral & Gifts","Video Games","Automotive","Health & Beauty","Other"];
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround();
         categoryPicker.delegate = self
         categoryPicker.dataSource = self
+        
+        categoryPicker.selectedRow(inComponent: 0)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -50,23 +50,21 @@ class PackageDetailsViewController: UIViewController
         if (segue.identifier == "OrderViewControllerSegue") {
             
             let orderView = segue.destination as! OrderViewController
-            var packageDetails = self.orderDetails.packageDetails;
-    
-            packageDetails.itemName = self.itemNameTxtF.text!
             
-            packageDetails.category = self.selectedCategory
-            
-            packageDetails.weight = Double(self.weightTxtF.text!) ?? 0
-            
-            packageDetails.size.length = Double(self.lengthTxtF.text!) ?? 0
-            packageDetails.size.width = Double(self.widthTxtF.text!) ?? 0
-            packageDetails.size.height = Double(self.heightTxtF.text!) ?? 0
-
-            packageDetails.isFragile = self.isFragileSwitch.isOn
-            packageDetails.count = Int(self.bagOrPiecesTxtF.text!) ?? 0
-            packageDetails.additionalDetails = self.additionalDetailsTxtView.text
+            let packageDetails = Package(itemName: self.itemNameTxtF.text!,
+                                         category: self.selectedCategory,
+                                         weight: Double(self.weightTxtF.text!) ?? 0,
+                                         isFragile: self.isFragileSwitch.isOn,
+                                         count: Int(self.bagOrPiecesTxtF.text!) ?? 0,
+                                         additionalDetails: self.additionalDetailsTxtView.text,
+                                         size: ItemSize(length: Double(self.lengthTxtF.text!) ?? 0,
+                                                        width: Double(self.widthTxtF.text!) ?? 0,
+                                                        height: Double(self.heightTxtF.text!) ?? 0))
             
             self.orderDetails.packageDetails = packageDetails
+            self.orderDetails.costPerDistanceUnit = Constants.costPerKm
+            self.orderDetails.convenienceFee = Constants.convenienceFee
+            
             orderView.orderDetails = self.orderDetails
         }
     }
@@ -78,19 +76,18 @@ extension PackageDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count;
+        return Constants.categories.count;
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+        return Constants.categories[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.selectedCategory = pickerData[row]
+        self.selectedCategory = Constants.categories[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 40.0
     }
-    
 }
