@@ -68,7 +68,7 @@ class OrderViewController: UIViewController{
 
         isFragileLbl.text = "\(orderDetails.packageDetails!.isFragile)"
         quantityLbl.text = "\(orderDetails.packageDetails!.count) Nos"
-        additionalDetailsLbl.text = orderDetails.packageDetails!.itemName
+        additionalDetailsLbl.text = orderDetails.packageDetails!.additionalDetails
         
         
         let dateFormatter = DateFormatter();

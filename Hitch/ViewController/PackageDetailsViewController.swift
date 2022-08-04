@@ -32,6 +32,10 @@ class PackageDetailsViewController: UIViewController
     
     @IBOutlet weak var additionalDetailsTxtView: UITextView!
     
+    @IBOutlet weak var disclaimerSwitch: UISwitch!
+    
+    @IBOutlet weak var nextBtn: UIButton!
+    
     var orderDetails : Order!
     
     var selectedCategory: String = ""
@@ -43,6 +47,14 @@ class PackageDetailsViewController: UIViewController
         categoryPicker.dataSource = self
         
         categoryPicker.selectedRow(inComponent: 0)
+        
+        nextBtn.isEnabled = disclaimerSwitch.isOn;
+        
+    }
+    
+    @IBAction func disclamerValueChanged(_ sender: UISwitch) {
+        
+        nextBtn.isEnabled = sender.isOn
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
