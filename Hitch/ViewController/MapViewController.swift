@@ -55,7 +55,6 @@ class MapViewController: UIViewController, UITextFieldDelegate {
         orderDetails = Order()
         orderDetails.userId = Auth.auth().currentUser!.uid
     }
-
     
     @IBAction func selectionLocationTextFTouched(_ sender: UITextField) {
         self.selectedTxtField = sender;

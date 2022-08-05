@@ -17,7 +17,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userPassword: UITextField!
     
     @IBOutlet weak var loginBtn: UIButton!
-    @IBOutlet weak var loader: UIActivityIndicatorView!
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
@@ -35,7 +34,6 @@ class LoginViewController: UIViewController {
 
     @IBAction func login(_ sender: Any) {
         loginBtn.titleLabel?.text = ""
-        loader.isHidden = false;
         
         if userEmail.text?.isEmpty == true || userPassword.text?.isEmpty == true{
         return
@@ -90,10 +88,11 @@ class LoginViewController: UIViewController {
             if type == "Driver"{
                 screen = "driverMainTab"
             }
+            
             let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
-            let vc = mainStoryboard.instantiateViewController(withIdentifier: screen)
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true);
+            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
+            UIApplication.shared.windows.first?.rootViewController = viewController
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
         }
         
     }
