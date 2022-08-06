@@ -45,7 +45,7 @@ class OrderViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let distanceInKms = orderDetails.distance!/1000
+         let distanceInKms = orderDetails.distance!/1000
         totalDistance.text = String(format: "%.2f km", distanceInKms)
         
         costPerKm.text = "$ \(orderDetails.costPerDistanceUnit!)"
@@ -84,5 +84,9 @@ class OrderViewController: UIViewController{
         } catch let error {
             print("Error writing orderdetails to Firestore: \(error)")
         }
+    }
+    
+    @IBAction func backBtnCliked(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

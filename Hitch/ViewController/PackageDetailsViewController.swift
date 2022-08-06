@@ -80,6 +80,10 @@ class PackageDetailsViewController: UIViewController
             orderView.orderDetails = self.orderDetails
         }
     }
+    
+    @IBAction func backBtn(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 extension PackageDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource{

@@ -36,6 +36,10 @@ class SearchViewController: UIViewController {
         searchResultsTbl?.delegate = self
         searchResultsTbl?.dataSource = self
     }
+    
+    @IBAction func backBtn(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 // Setting up extensions for the table view
