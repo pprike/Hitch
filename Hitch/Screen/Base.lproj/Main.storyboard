@@ -881,11 +881,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="761"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Enter Location here ..." translatesAutoresizingMaskIntoConstraints="NO" id="DOG-wR-eEf">
+                            <searchBar contentMode="redraw" text="" placeholder="Enter Location here ..." translatesAutoresizingMaskIntoConstraints="NO" id="DOG-wR-eEf">
                                 <rect key="frame" x="0.0" y="101" width="390" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="61" id="hpS-XV-d9g"/>
                                 </constraints>
+                                <color key="tintColor" red="0.83529412749999998" green="0.23921570180000001" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <textInputTraits key="textInputTraits" textContentType="location"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>

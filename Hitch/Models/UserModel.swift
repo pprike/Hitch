@@ -37,7 +37,8 @@ class UserModel: NSObject {
             "age": age! ,
             "password": password!,
             "userType": userType!,
-            "phone": phone!
+            "phone": phone!,
+            "profilePic":""
         ]
       }
 }
