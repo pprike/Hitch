@@ -16,6 +16,8 @@ class OrderDetailsViewController: UIViewController
     
     @IBOutlet weak var profilePicImgView: UIImageView!
     
+    @IBOutlet weak var userDetailsLbl: UILabel!
+    
     @IBOutlet weak var userNametxtF: UILabel!
     
     @IBOutlet weak var userEmailTxtF: UILabel!
@@ -36,21 +38,37 @@ class OrderDetailsViewController: UIViewController
     
     @IBOutlet weak var tripPriceLbl: UILabel!
     
-    @IBOutlet weak var acceptBtnLbl: UIButton!
+    @IBOutlet weak var acceptBtn: UIButton!
+    
+    @IBOutlet weak var trackBtn: UIButton!
+    
+    @IBOutlet weak var tripCostLbl: UILabel!
+    
+    var tripValue: Double?
     
     var order : Order?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         mapView.delegate = self;
-        
-        if (Constants.userType == Constants.userPatron) {
-            acceptBtnLbl.isHidden =  true
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        if (Constants.userType == Constants.userPatron) {
+            acceptBtn.isHidden =  true
+            trackBtn.isHidden = false
+            userDetailsLbl.text = "Driver Details"
+            tripCostLbl.text = "Total Cost"
+            tripValue = order!.totalPrice!
+        } else {
+            acceptBtn.isHidden =  false
+            trackBtn.isHidden = true
+            userDetailsLbl.text = "Consignee Details"
+            tripCostLbl.text = "Earnings"
+            tripValue = order!.totalPrice! - order!.convenienceFee!
+        }
+        
         drawRoute()
         populateUserDetails()
         populateOderDetails()
@@ -69,20 +87,56 @@ class OrderDetailsViewController: UIViewController
        
         noteLbl.text = order!.packageDetails!.additionalDetails
         
-        tripPriceLbl.text = String(format: "$ %.2f", (order!.totalPrice! - order!.convenienceFee!))
+        tripPriceLbl.text = String(format: "$ %.2f", tripValue!)
+        
+        if ( order!.orderStatus == Constants.orderPlaced) {
+            order!.orderStatus = Constants.orderAssigned
+            acceptBtn.setTitle("Accept Order", for: UIControl.State.normal)
+        } else if ( order!.orderStatus == Constants.orderAssigned) {
+            order!.orderStatus = Constants.orderPickedUp
+            acceptBtn.setTitle("Mark as Picked Up", for: UIControl.State.normal)
+        } else if ( order!.orderStatus == Constants.orderPickedUp) {
+            order!.orderStatus = Constants.orderComplete
+            acceptBtn.setTitle("Mark as Delivered", for: UIControl.State.normal)
+        } else if ( order!.orderStatus == Constants.orderComplete) {
+            order!.orderStatus = Constants.orderComplete
+            acceptBtn.isHidden = true
+            trackBtn.isHidden = true
+        }
     }
     
     func  populateUserDetails() {
+    
+        var userId : String
         
-        let docRef = Firestore.firestore().collection("Users")
-            .document(order!.userId!)
+        if (Constants.userType == Constants.userPatron) {
+            userId = order!.driverDetails?.driverId! ?? ""
+        } else {
+            userId = order!.userId!
+        }
         
-        docRef.getDocument { (document, error) in
+        if (userId != "") {
+            let docRef = Firestore.firestore().collection("Users")
+                .document(userId)
             
-            if let document = document, document.exists {
-                self.userNametxtF.text = (document.get("name") as! String);
-                self.userEmailTxtF.text = (document.get("email") as! String);
-             }
+            docRef.getDocument { (document, error) in
+                
+                if let document = document, document.exists {
+                    self.userNametxtF.text = (document.get("name") as! String);
+                    self.userEmailTxtF.text = (document.get("email") as! String);
+                    
+                    if (Constants.userType == Constants.userPatron) {
+                        self.trackBtn.isEnabled = true
+                    }
+                }
+            }
+        } else {
+            self.userNametxtF.text = "Not Assigned"
+            self.userEmailTxtF.text = "Not Assigned"
+            
+            if (Constants.userType == Constants.userPatron) {
+                self.trackBtn.isEnabled = false
+            }
         }
     }
     
@@ -137,6 +191,27 @@ class OrderDetailsViewController: UIViewController
     
     @IBAction func backBtnCliked(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func acceptBtnClicked(_ sender: Any) {
+        do {
+            let orderCollection = Firestore.firestore().collection("Orders");
+            _ = try orderCollection.document(order!.id!).setData(from: order!)
+        } catch let error {
+            print("Error updating order details to Firestore: \(error)")
+        }
+    }
+    
+    @IBAction func trackBtnClicked(_ sender: Any) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if (segue.identifier == "TrackOrderViewControllerSegue") {
+            
+            let trackOrderView = segue.destination as! TrackOrderViewController
+            trackOrderView.order = self.order!
+        }
     }
 }
 

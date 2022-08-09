@@ -20,7 +20,11 @@ struct Constants {
     static var userType = ""
     
     static let userDriver = "Driver"
-    
     static let userPatron = "Patron"
-
+    
+    static let orderPlaced = "PLACED"
+    static let orderAssigned = "ASSIGNED"
+    static let orderPickedUp = "PICKED"
+    static let orderComplete = "COMPLETE"
+    static let orderCancelled = "CANCELLED"
 }

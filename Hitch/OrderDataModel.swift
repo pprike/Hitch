@@ -23,10 +23,10 @@ struct Order: Identifiable, Codable {
     var userId: String?
     var pickupLocation: LocationDetails?
     var dropLocation: LocationDetails?
+    var driverDetails: Driver?
 }
 
 struct Package: Codable {
-    
     var itemName: String
     var category: String
     var weight: Double
@@ -46,4 +46,9 @@ struct LocationDetails: Codable {
     var lat: Double
     var long: Double
     var address: String
+}
+
+struct Driver: Codable {
+    var location: LocationDetails?
+    var driverId: String?
 }

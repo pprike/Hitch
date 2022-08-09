@@ -36,6 +36,7 @@
 		48A946032883546B00E288F5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A946022883546B00E288F5 /* MapViewController.swift */; };
 		48A9460528836DA800E288F5 /* OrderDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9460428836DA800E288F5 /* OrderDataModel.swift */; };
 		48B89C6728A0CCB40025360D /* DriverHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B89C6628A0CCB40025360D /* DriverHomeViewController.swift */; };
+		48B89C6928A2355D0025360D /* TrackOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B89C6828A2355D0025360D /* TrackOrderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		48A946022883546B00E288F5 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		48A9460428836DA800E288F5 /* OrderDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDataModel.swift; sourceTree = "<group>"; };
 		48B89C6628A0CCB40025360D /* DriverHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverHomeViewController.swift; sourceTree = "<group>"; };
+		48B89C6828A2355D0025360D /* TrackOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOrderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 				4863A98E2898C1E7009A94B2 /* TripViewController.swift */,
 				4863A998289C6726009A94B2 /* OrderDetailsViewController.swift */,
 				48B89C6628A0CCB40025360D /* DriverHomeViewController.swift */,
+				48B89C6828A2355D0025360D /* TrackOrderViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				47B198B5287E46270006C3D4 /* PackageDetailsViewController.swift in Sources */,
 				476AF37B285EE30F001DABFF /* AppDelegate.swift in Sources */,
 				476AF385285EE30F001DABFF /* Hitch.xcdatamodeld in Sources */,
+				48B89C6928A2355D0025360D /* TrackOrderViewController.swift in Sources */,
 				476AF37D285EE30F001DABFF /* SceneDelegate.swift in Sources */,
 				48A946032883546B00E288F5 /* MapViewController.swift in Sources */,
 				4863A98F2898C1E7009A94B2 /* TripViewController.swift in Sources */,
