@@ -16,6 +16,7 @@ import FirebaseStorage
 
 class UserProfileViewController : UIViewController{
     
+    //Test
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var emailLabel: UILabel!
