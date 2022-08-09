@@ -24,6 +24,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var userAge: UITextField!
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var userTypeControl: UISegmentedControl!
+    @IBOutlet weak var phoneNo: UITextField!
     @IBOutlet weak var uploadDocsBtn: UIButton!
     var filePath: URL!
     
@@ -37,8 +38,8 @@ class SignUpViewController: UIViewController {
     }
 
     @IBAction func signUpClicked(_ sender: Any) {
-        if userEmail.text?.isEmpty == true || password.text?.isEmpty == true || userAge.text?.isEmpty == true || confirmPassword.text?.isEmpty == true || userName.text?.isEmpty == true {
-            print("Email and Password Required");
+        if userEmail.text?.isEmpty == true || password.text?.isEmpty == true || userAge.text?.isEmpty == true || confirmPassword.text?.isEmpty == true || userName.text?.isEmpty == true || phoneNo.text?.isEmpty == true {
+            print("Data Required");
             displayMessage(title: "Data Required", msg: "Please fill all data")
             return
         }
@@ -58,20 +59,28 @@ class SignUpViewController: UIViewController {
             print("User: \(String(describing: user?.uid))")
             let userCollection = Firestore.firestore().collection("Users");
             let type = userTypeControl.selectedSegmentIndex==0 ? Constants.userPatron : Constants.userDriver;
-            let User =  UserModel(id:user?.uid,name:userName.text,email:userEmail.text,age:Int(userAge.text!),password:self.password.text,userType:type);
+            let User =  UserModel(id:user?.uid,name:userName.text,email:userEmail.text,age:Int(userAge.text!),password:self.password.text,userType:type,phone:phoneNo.text);
             userCollection.document(user!.uid).setData(User.dictionary);
             if((filePath) != nil){
                 uploadToFirebase(fileUrls: filePath, UID: user!.uid);
             }
 //          userCollection.addDocument(data: User.dictionary);
-            var screen = "mainBottomNav";
-            if type == Constants.userDriver{
-                screen = "driverMainTab"
-            }
+//            var screen = "mainBottomNav";
+//            if type == Constants.userDriver{
+//                screen = "driverMainTab"
+//            }
             let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
-            let vc = mainStoryboard.instantiateViewController(withIdentifier: screen)
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true);
+            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
+            
+            if type == Constants.userDriver {
+                Constants.userType = Constants.userDriver
+                viewController.viewControllers?.remove(at: 0)
+            } else {
+                Constants.userType = Constants.userPatron
+            }
+                            
+            UIApplication.shared.windows.first?.rootViewController = viewController
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
         }
         
     }
@@ -111,6 +120,7 @@ extension SignUpViewController: UIDocumentPickerDelegate {
         let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let sandboxFileURL = dir.appendingPathComponent(selectedFileURL.lastPathComponent)
         filePath = sandboxFileURL;
+        print("FILE URL: \(String(describing: filePath))");
 //        if FileManager.default.fileExists(atPath: sandboxFileURL.path) {
 //            print("Already exists! Do nothing");
 //            do{
@@ -131,24 +141,31 @@ extension SignUpViewController: UIDocumentPickerDelegate {
 //                print("Error: \(error)")
 //            }
 //        }
-//        uploadToFirebase(fileUrls:selectedFileURL);
+//        uploadToFirebase(fileUrls:filePath,UID: "0wB2EGNC8QUYeTMgRYfR9kwXT7Y2");
     }
     
     func uploadToFirebase(fileUrls: URL,UID: String){
         let localFile = fileUrls;
         let storageRef = storage.reference();
-        let docRef = storageRef.child("DriverDocs/"+fileUrls.lastPathComponent)
-        let uploadTask_ = docRef.putFile(from: localFile);
+        let docRef = storageRef.child("driverDocs/"+fileUrls.lastPathComponent)
+        let _ = docRef.putFile(from: fileUrls);
+        // Upload the file to the path "images/rivers.jpg"
+        docRef.putFile(from: localFile, metadata: nil) { metadata, error in
+            guard metadata != nil else {
+            // Uh-oh, an error occurred!
+              print("Error__ \(String(describing: error?.localizedDescription))")
+            return
+          }
             docRef.downloadURL { (url, error) in
             guard let downloadURL = url else {
-                print("Error__ \(error?.localizedDescription)")
+                print("Error__ \(String(describing: error?.localizedDescription))")
               return
             }
               print("FIREBASE FILE URL: \(downloadURL)");
           }
         }
             
-//    }
+     }
 }
 
 
