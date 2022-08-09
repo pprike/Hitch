@@ -26,6 +26,10 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var userTypeControl: UISegmentedControl!
     @IBOutlet weak var phoneNo: UITextField!
     @IBOutlet weak var uploadDocsBtn: UIButton!
+    @IBOutlet weak var fileInfoLabel: UILabel!
+    @IBOutlet weak var boxHeight: NSLayoutConstraint!
+    @IBOutlet weak var boxView: UIView!
+    @IBOutlet weak var forgetLabelBottomMargin: NSLayoutConstraint!
     var filePath: URL!
     
     // Get a reference to the storage service using the default Firebase App
@@ -87,9 +91,18 @@ class SignUpViewController: UIViewController {
 
     @IBAction func userTypeChanged(_ sender: Any) {
         if(userTypeControl.selectedSegmentIndex==1){
+            boxHeight.constant = 550;
+            boxView.layoutIfNeeded();
+            forgetLabelBottomMargin.constant = 10;
             uploadDocsBtn.isHidden = false;
+            fileInfoLabel.isHidden = false;
         }else{
+            boxHeight.constant = 500;
+            forgetLabelBottomMargin.constant = 50;
+            boxView.layoutIfNeeded();
+            
             uploadDocsBtn.isHidden = true;
+            fileInfoLabel.isHidden = true;
         }
     }
     @IBAction func uploadDocClicked(_ sender: Any) {

@@ -50,7 +50,10 @@ class UserProfileViewController : UIViewController{
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 print("Document data: \(dataDescription)")
 //                type = document.get("userType") as! String;
-                self.profileImage.loadFrom(URLAddress: document.get("profilePic") as! String)
+                let image = document.get("profilePic") as! String;
+                if image.isEmpty != true{
+                    self.profileImage.loadFrom(URLAddress: image)
+                }
                 self.profileNameLabel.text = document.get("name")as? String;
                 self.emailLabel.text = document.get("email")as? String;
                 let age = document.get("age") as! Int;

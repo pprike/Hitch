@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseCore
+import PassKit
 
 class OrderViewController: UIViewController{
     
@@ -80,15 +81,63 @@ class OrderViewController: UIViewController{
         
         orderDetails.orderStatus = Constants.orderPlaced
         
+//        do {
+//            let orderCollection = Firestore.firestore().collection("Orders");
+//            _ = try orderCollection.addDocument(from: orderDetails)
+//        } catch let error {
+//            print("Error writing orderdetails to Firestore: \(error)")
+//        }
+    }
+    
+    @IBAction func backBtnCliked(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    private var paymentRequest : PKPaymentRequest = {
+          let request = PKPaymentRequest()
+          request.merchantIdentifier = "merchant.com.app.Hitchapp"
+          request.supportedNetworks = [.quicPay, .masterCard, .visa]
+          request.supportedCountries = ["IN", "US","CA"]
+          request.merchantCapabilities = .capability3DS
+          request.countryCode = "CA"
+          request.currencyCode = "CAD"
+//        request.paymentSummaryItems = [PKPaymentSummaryItem(label: "Trip Payment", amount: NSDecimalNumber(value: orderDetails.totalPrice!))]
+          return request
+      }()
+    
+    @IBAction func orderClicked(_ sender: Any) {
+        paymentRequest.paymentSummaryItems = [PKPaymentSummaryItem(label: "Trip Payment", amount: NSDecimalNumber(value: orderDetails.totalPrice!))]
+        let controller = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest)
+                if controller != nil {
+                    controller!.delegate = self
+                    present(controller!, animated: true, completion: nil)
+                }
+    }
+    
+}
+
+extension OrderViewController : PKPaymentAuthorizationViewControllerDelegate {
+    func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+        controller.dismiss(animated: true, completion: nil);
+    }
+    
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+        completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
         do {
             let orderCollection = Firestore.firestore().collection("Orders");
             _ = try orderCollection.addDocument(from: orderDetails)
         } catch let error {
             print("Error writing orderdetails to Firestore: \(error)")
         }
-    }
-    
-    @IBAction func backBtnCliked(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        
+        
+        
+        let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
+        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "successView")
+        
+        if let sheet = viewController.sheetPresentationController {
+            sheet.detents = [ .medium()]
+        }
+        present(viewController, animated: true)
     }
 }

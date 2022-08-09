@@ -84,7 +84,7 @@ class LoginViewController: UIViewController {
                 let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
                 let viewController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
                 
-                if userType == Constants.userDriver {
+                if userType == Constants.userDriver { 
                     Constants.userType = Constants.userDriver
                     viewController.viewControllers?.remove(at: 0)
                 } else {

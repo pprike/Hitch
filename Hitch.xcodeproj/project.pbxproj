@@ -24,6 +24,9 @@
 		47B198B7287EA7940006C3D4 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B198B6287EA7940006C3D4 /* OrderViewController.swift */; };
 		47B7D14C289752670022571A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B7D14B289752670022571A /* UserModel.swift */; };
 		47BB8FE428A212640086D470 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB8FE328A212640086D470 /* UserProfileViewController.swift */; };
+		47BB8FE928A2EB020086D470 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB8FE828A2EB020086D470 /* SuccessViewController.swift */; };
+		47BB8FEB28A2EF760086D470 /* GifLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB8FEA28A2EF760086D470 /* GifLoader.swift */; };
+		47BB8FED28A2F1D10086D470 /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = 47BB8FEC28A2F1D10086D470 /* success.gif */; };
 		4863A98F2898C1E7009A94B2 /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A98E2898C1E7009A94B2 /* TripViewController.swift */; };
 		4863A9912898D08E009A94B2 /* TripViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A9902898D08E009A94B2 /* TripViewCell.swift */; };
 		4863A9932898ED14009A94B2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A9922898ED14009A94B2 /* Constants.swift */; };
@@ -78,6 +81,10 @@
 		47B198B6287EA7940006C3D4 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		47B7D14B289752670022571A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		47BB8FE328A212640086D470 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		47BB8FE528A2E0B40086D470 /* Hitch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hitch.entitlements; sourceTree = "<group>"; };
+		47BB8FE828A2EB020086D470 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
+		47BB8FEA28A2EF760086D470 /* GifLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifLoader.swift; sourceTree = "<group>"; };
+		47BB8FEC28A2F1D10086D470 /* success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = success.gif; sourceTree = "<group>"; };
 		4863A98E2898C1E7009A94B2 /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
 		4863A9902898D08E009A94B2 /* TripViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewCell.swift; sourceTree = "<group>"; };
 		4863A9922898ED14009A94B2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -144,6 +151,8 @@
 		476AF379285EE30F001DABFF /* Hitch */ = {
 			isa = PBXGroup;
 			children = (
+				47BB8FEC28A2F1D10086D470 /* success.gif */,
+				47BB8FE528A2E0B40086D470 /* Hitch.entitlements */,
 				47B7D14A289751B30022571A /* Models */,
 				48A946012883541D00E288F5 /* ViewController */,
 				476AF3AD285EE373001DABFF /* Screen */,
@@ -156,6 +165,7 @@
 				476AF383285EE30F001DABFF /* Hitch.xcdatamodeld */,
 				48A9460428836DA800E288F5 /* OrderDataModel.swift */,
 				4863A9922898ED14009A94B2 /* Constants.swift */,
+				47BB8FEA28A2EF760086D470 /* GifLoader.swift */,
 			);
 			path = Hitch;
 			sourceTree = "<group>";
@@ -215,6 +225,7 @@
 				48B89C6628A0CCB40025360D /* DriverHomeViewController.swift */,
 				47BB8FE328A212640086D470 /* UserProfileViewController.swift */,
 				48B89C6828A2355D0025360D /* TrackOrderViewController.swift */,
+				47BB8FE828A2EB020086D470 /* SuccessViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -340,6 +351,7 @@
 				478E5B65288FA902007011E0 /* GoogleService-Info.plist in Resources */,
 				476AF387285EE312001DABFF /* Assets.xcassets in Resources */,
 				476AF382285EE30F001DABFF /* Main.storyboard in Resources */,
+				47BB8FED28A2F1D10086D470 /* success.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +383,7 @@
 				4863A9912898D08E009A94B2 /* TripViewCell.swift in Sources */,
 				47BB8FE428A212640086D470 /* UserProfileViewController.swift in Sources */,
 				48A94600288224BE00E288F5 /* SearchViewController.swift in Sources */,
+				47BB8FEB28A2EF760086D470 /* GifLoader.swift in Sources */,
 				47B198B5287E46270006C3D4 /* PackageDetailsViewController.swift in Sources */,
 				476AF37B285EE30F001DABFF /* AppDelegate.swift in Sources */,
 				476AF385285EE30F001DABFF /* Hitch.xcdatamodeld in Sources */,
@@ -378,6 +391,7 @@
 				476AF37D285EE30F001DABFF /* SceneDelegate.swift in Sources */,
 				48A946032883546B00E288F5 /* MapViewController.swift in Sources */,
 				4863A98F2898C1E7009A94B2 /* TripViewController.swift in Sources */,
+				47BB8FE928A2EB020086D470 /* SuccessViewController.swift in Sources */,
 				4863A9932898ED14009A94B2 /* Constants.swift in Sources */,
 				48B89C6728A0CCB40025360D /* DriverHomeViewController.swift in Sources */,
 				47B7D14C289752670022571A /* UserModel.swift in Sources */,
@@ -556,9 +570,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Hitch/Hitch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 59Z3S2L2B4;
+				DEVELOPMENT_TEAM = FRZ5Y4T9KM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hitch/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Hitch wants to access your location";
@@ -587,9 +602,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Hitch/Hitch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 59Z3S2L2B4;
+				DEVELOPMENT_TEAM = FRZ5Y4T9KM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Hitch/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Hitch wants to access your location";
