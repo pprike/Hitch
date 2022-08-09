@@ -46,7 +46,9 @@ class OrderDetailsViewController: UIViewController
     
     var tripValue: Double?
     
-    var order : Order?
+    var order: Order?
+    
+    var nextOrderState: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,16 +92,16 @@ class OrderDetailsViewController: UIViewController
         tripPriceLbl.text = String(format: "$ %.2f", tripValue!)
         
         if ( order!.orderStatus == Constants.orderPlaced) {
-            order!.orderStatus = Constants.orderAssigned
+            nextOrderState = Constants.orderAssigned
             acceptBtn.setTitle("Accept Order", for: UIControl.State.normal)
         } else if ( order!.orderStatus == Constants.orderAssigned) {
-            order!.orderStatus = Constants.orderPickedUp
+            nextOrderState = Constants.orderPickedUp
             acceptBtn.setTitle("Mark as Picked Up", for: UIControl.State.normal)
         } else if ( order!.orderStatus == Constants.orderPickedUp) {
-            order!.orderStatus = Constants.orderComplete
+            nextOrderState = Constants.orderComplete
             acceptBtn.setTitle("Mark as Delivered", for: UIControl.State.normal)
         } else if ( order!.orderStatus == Constants.orderComplete) {
-            order!.orderStatus = Constants.orderComplete
+            nextOrderState = Constants.orderComplete
             acceptBtn.isHidden = true
             trackBtn.isHidden = true
         }
@@ -195,14 +197,12 @@ class OrderDetailsViewController: UIViewController
     
     @IBAction func acceptBtnClicked(_ sender: Any) {
         do {
+            self.order!.orderStatus = nextOrderState
             let orderCollection = Firestore.firestore().collection("Orders");
             _ = try orderCollection.document(order!.id!).setData(from: order!)
         } catch let error {
             print("Error updating order details to Firestore: \(error)")
         }
-    }
-    
-    @IBAction func trackBtnClicked(_ sender: Any) {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

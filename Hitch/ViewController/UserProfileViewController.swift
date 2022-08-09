@@ -61,8 +61,6 @@ class UserProfileViewController : UIViewController{
             } else {
                 print("User does not exist")
              }
-            
-            
         }
         
     }

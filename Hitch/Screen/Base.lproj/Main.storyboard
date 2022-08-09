@@ -23,14 +23,14 @@
                     </tabBar>
                     <connections>
                         <segue destination="KDR-fR-PpY" kind="relationship" relationship="viewControllers" id="ZKi-7C-UbV"/>
-                        <segue destination="ejq-eu-BSk" kind="relationship" relationship="viewControllers" id="pYF-fn-DTZ"/>
-                        <segue destination="4mc-3Z-jwR" kind="relationship" relationship="viewControllers" id="a9f-xK-FIx"/>
-                        <segue destination="5fD-ZO-u72" kind="relationship" relationship="viewControllers" id="Tgc-hC-WVN"/>
+                        <segue destination="5fD-ZO-u72" kind="relationship" relationship="viewControllers" id="hKF-UZ-0bx"/>
+                        <segue destination="ejq-eu-BSk" kind="relationship" relationship="viewControllers" id="XFt-Jb-Ydn"/>
+                        <segue destination="4mc-3Z-jwR" kind="relationship" relationship="viewControllers" id="OL8-6c-lb0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jw9-wD-c1C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="577" y="1456"/>
+            <point key="canvasLocation" x="605" y="1455"/>
         </scene>
         <!--User Profile View Controller-->
         <scene sceneID="zPq-Pn-Doi">
@@ -690,11 +690,11 @@
             </objects>
             <point key="canvasLocation" x="-722" y="1006"/>
         </scene>
-        <!--Hitch-->
+        <!--Request Pickup-->
         <scene sceneID="Lsc-oT-S0d">
             <objects>
                 <navigationController navigationBarHidden="YES" id="KDR-fR-PpY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Hitch" image="location.magnifyingglass" catalog="system" selectedImage="location.magnifyingglass" id="rnT-oV-wAb">
+                    <tabBarItem key="tabBarItem" title="Request Pickup" image="location.magnifyingglass" catalog="system" selectedImage="location.magnifyingglass" id="rnT-oV-wAb">
                         <color key="badgeColor" red="0.83529412749999998" green="0.23921570180000001" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="I0f-hL-ifK">
@@ -1891,8 +1891,7 @@
                                     <color key="baseBackgroundColor" red="0.83529412749999998" green="0.23921570180000001" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="trackBtnClicked:" destination="IWJ-rs-U1u" eventType="touchUpInside" id="OHl-SJ-QHH"/>
-                                    <segue destination="7uv-g8-QJX" kind="show" customClass="TrackOrderSegue" id="hVN-lg-KbU"/>
+                                    <segue destination="7uv-g8-QJX" kind="show" identifier="TrackOrderViewControllerSegue" id="hVN-lg-KbU"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="urh-R8-E4f">
@@ -2278,11 +2277,11 @@
             </objects>
             <point key="canvasLocation" x="3977" y="1455"/>
         </scene>
-        <!--Trips-->
+        <!--My Orders-->
         <scene sceneID="cxm-3C-Jai">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ejq-eu-BSk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Trips" selectedImage="clock.badge.checkmark" catalog="system" id="aa2-to-q2K">
+                    <tabBarItem key="tabBarItem" title="My Orders" selectedImage="clock.badge.checkmark" catalog="system" id="aa2-to-q2K">
                         <imageReference key="image" image="clock.badge.checkmark" catalog="system" symbolScale="medium"/>
                         <color key="badgeColor" red="0.83529412749999998" green="0.23921570180000001" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBarItem>
@@ -2531,8 +2530,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lew-ZL-SwA">
                                 <rect key="frame" x="20" y="651" width="350" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHH-jP-Ou1">
-                                        <rect key="frame" x="98" y="6" width="96.666666666666686" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Driver Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHH-jP-Ou1">
+                                        <rect key="frame" x="98" y="6" width="107" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2631,7 +2630,7 @@
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="backBtnCliked:" destination="7uv-g8-QJX" eventType="touchUpInside" id="UfK-yB-BQh"/>
+                                            <action selector="backBtn:" destination="7uv-g8-QJX" eventType="touchUpInside" id="TmU-FZ-Q37"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgP-Zf-g6A">
@@ -2672,10 +2671,6 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="mapView" destination="aQ7-Xt-NrD" id="W16-3T-ubd"/>
-                        <outlet property="profilePicImgView" destination="0wF-ex-5xw" id="XbD-lK-5xh"/>
-                        <outlet property="userDetailsLbl" destination="dHH-jP-Ou1" id="Whf-jJ-fJJ"/>
-                        <outlet property="userEmailTxtF" destination="H9L-3A-Cox" id="xec-1f-rkS"/>
-                        <outlet property="userNametxtF" destination="T7X-Ba-lm6" id="KgD-Zn-Evh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gne-5Q-HAf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

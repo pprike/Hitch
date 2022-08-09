@@ -89,6 +89,7 @@ class LoginViewController: UIViewController {
                     viewController.viewControllers?.remove(at: 0)
                 } else {
                     Constants.userType = Constants.userPatron
+                    viewController.viewControllers?.remove(at: 1)
                 }
                                 
                 UIApplication.shared.windows.first?.rootViewController = viewController
