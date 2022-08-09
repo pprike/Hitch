@@ -74,42 +74,31 @@ class LoginViewController: UIViewController {
     }
     
     func getUserFromFirebase(uid: String)  {
-        var screen = "mainBottomNav";
-        var type: String = "";
         let docRef = db.collection("Users").document(uid)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 print("Document data: \(dataDescription)")
-                type = document.get("userType") as! String;
+                let userType = document.get("userType") as! String;
+                
+                let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
+                
+                if userType == Constants.userDriver {
+                    Constants.userType = Constants.userDriver
+                    viewController.viewControllers?.remove(at: 0)
+                } else {
+                    Constants.userType = Constants.userPatron
+                }
+                                
+                UIApplication.shared.windows.first?.rootViewController = viewController
+                UIApplication.shared.windows.first?.makeKeyAndVisible()
+                
             } else {
                 print("Document does not exist")
             }
-            if type == "Driver"{
-                screen = "driverMainTab"
-            }
-            
-            let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
-            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
-            UIApplication.shared.windows.first?.rootViewController = viewController
-            UIApplication.shared.windows.first?.makeKeyAndVisible()
         }
-        
     }
-    
-    
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        if identifier == "login" {
-//            if Auth.auth().currentUser?.uid != nil {
-//                print("User ID: \(Auth.auth().currentUser?.uid ?? "")");
-//
-//            return true;
-//        }
-//        }
-//        return false;
-//    }
-    
-    
 }
 
 extension UIViewController {

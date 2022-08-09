@@ -16,4 +16,11 @@ struct Constants {
     static let costPerKm = 0.40;
     
     static  let convenienceFee = 2.0;
+    
+    static var userType = ""
+    
+    static let userDriver = "Driver"
+    
+    static let userPatron = "Patron"
+
 }

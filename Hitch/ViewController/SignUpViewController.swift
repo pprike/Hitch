@@ -57,7 +57,7 @@ class SignUpViewController: UIViewController {
             }
             print("User: \(String(describing: user?.uid))")
             let userCollection = Firestore.firestore().collection("Users");
-            let type = userTypeControl.selectedSegmentIndex==0 ? "Patron" : "Driver";
+            let type = userTypeControl.selectedSegmentIndex==0 ? Constants.userPatron : Constants.userDriver;
             let User =  UserModel(id:user?.uid,name:userName.text,email:userEmail.text,age:Int(userAge.text!),password:self.password.text,userType:type);
             userCollection.document(user!.uid).setData(User.dictionary);
             if((filePath) != nil){
@@ -65,7 +65,7 @@ class SignUpViewController: UIViewController {
             }
 //          userCollection.addDocument(data: User.dictionary);
             var screen = "mainBottomNav";
-            if type=="Driver"{
+            if type == Constants.userDriver{
                 screen = "driverMainTab"
             }
             let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)

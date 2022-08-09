@@ -1,8 +1,8 @@
 //
-//  TripViewController.swift
+//  DriverHomeViewController.swift
 //  Hitch
 //
-//  Created by Parikshit Murria on 2022-08-01.
+//  Created by Parikshit Murria on 2022-08-08.
 //
 
 import Foundation
@@ -10,8 +10,11 @@ import UIKit
 import Firebase
 import MapKit
 
-class TripViewController: UIViewController
+class DriverHomeViewController: UIViewController
 {
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
     @IBOutlet weak var tripListTable: UITableView!
     
     var orders = [Order]()
@@ -24,6 +27,9 @@ class TripViewController: UIViewController
     
     //Location manage to get the locations.
     let locationManager = CLLocationManager();
+    
+    //array for annotations
+    var allAnnotations = [MKAnnotation]();
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,22 +49,15 @@ class TripViewController: UIViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getUserOrders();
+        getNearbyOrders();
     }
     
-    func getUserOrders() {
+    func getNearbyOrders() {
         
-        var orderCollection: Query?
+        let orderCollection = Firestore.firestore().collection("Orders");
         
-        if (Constants.userType == Constants.userDriver) {
-            orderCollection = Firestore.firestore().collection("Orders");
-        } else {
-            orderCollection = Firestore.firestore().collection("Orders")
-                .whereField("userId", isEqualTo: Auth.auth().currentUser?.uid as Any);
-        }
-        
-       orderCollection!
-            .addSnapshotListener { (querySnapshot, err) in
+       orderCollection
+            .addSnapshotListener { [self] (querySnapshot, err) in
                 if let err = err {
                     print("Error getting orders: \(err)")
                 } else {
@@ -72,24 +71,30 @@ class TripViewController: UIViewController
                             return try! document.data(as: Order.self)
                         }
                     
-                    if (Constants.userType == Constants.userDriver) {
+                    self.orders.removeAll()
+                    self.allAnnotations.removeAll();
+                    
+                    for order in orders {
                         
-                        self.orders.removeAll()
+                        let pickupLocation = CLLocation(latitude: order.pickupLocation!.lat,
+                            longitude: order.pickupLocation!.long)
                         
-                        for order in orders {
+                        let distanceInMeters = pickupLocation.distance(from: self.currentLoc!)
+                        
+                        if (distanceInMeters < self.range) {
+                            self.orders.append(order)
                             
-                            let pickupLocation = CLLocation(latitude: order.pickupLocation!.lat,
-                                longitude: order.pickupLocation!.long)
-                            
-                            let distanceInMeters = pickupLocation.distance(from: self.currentLoc!)
-                            
-                            if (distanceInMeters < self.range) {
-                                self.orders.append(order)
-                            }
+                            //Creating annnotation with hospital coordinates.
+                            let pin = MKPointAnnotation();
+                            pin.coordinate = pickupLocation.coordinate;
+                            pin.title = order.pickupLocation?.address;
+                            pin.subtitle = String(format: "%.2f Kms", distanceInMeters/1000)
+                            self.allAnnotations.append(pin)
                         }
-                    } else {
-                        self.orders = orders
                     }
+                    
+                    //add all the annotations in the list to show on map.
+                    self.mapView.showAnnotations(self.allAnnotations, animated: true);
                     
                     //Reload table on main thread asynchronously.
                     DispatchQueue.main.async {
@@ -97,12 +102,11 @@ class TripViewController: UIViewController
                     }
                 }
             }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if (segue.identifier == "OrderDetailsViewControllerSegue") {
+        if (segue.identifier == "NearbyOrderDetailsViewControllerSegue") {
             
             let orderDetailsView = segue.destination as! OrderDetailsViewController
             orderDetailsView.order = selectedOrder!
@@ -110,18 +114,14 @@ class TripViewController: UIViewController
     }
 }
 
-extension TripViewController: UITableViewDelegate, UITableViewDataSource {
+extension DriverHomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.orders.count;
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if (Constants.userType == Constants.userDriver) {
-            return "Nearby Orders"
-        } else {
-            return "Recent Orders"
-        }
+        return "Nearby Orders"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -143,11 +143,11 @@ extension TripViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedOrder = orders[indexPath.row]
-        performSegue(withIdentifier: "OrderDetailsViewControllerSegue", sender: indexPath)
+        performSegue(withIdentifier: "NearbyOrderDetailsViewControllerSegue", sender: indexPath)
     }
 }
 
-extension TripViewController: CLLocationManagerDelegate {
+extension DriverHomeViewController: CLLocationManagerDelegate {
     
     // This delegate is used to update the source location location is updated.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -155,9 +155,26 @@ extension TripViewController: CLLocationManagerDelegate {
         if let location = locations.first {
             
             currentLoc = location
-            if (Constants.userType == Constants.userDriver) {
-                self.getUserOrders()
-            }
+            self.getNearbyOrders()
+            zoom(location)
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to get loation: \(error)")
+    }
+    
+    // zoom and set the region on map.
+    func zoom(_ location: CLLocation) {
+        
+        // Fetching coordinates of the location
+        let coodinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        
+        // Defines the span required by the map region.
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        
+        //setting region to be shown on Map.
+        let region = MKCoordinateRegion(center: coodinate, span: span);
+        mapView.setRegion(region, animated: true)
     }
 }
