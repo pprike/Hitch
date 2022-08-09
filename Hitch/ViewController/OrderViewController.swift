@@ -78,9 +78,11 @@ class OrderViewController: UIViewController{
         dateFormatter.dateFormat = "HH:mm a"
         orderDetails.orderTime = dateFormatter.string(from: Date())
         
+        orderDetails.orderStatus = Constants.orderPlaced
+        
         do {
             let orderCollection = Firestore.firestore().collection("Orders");
-            let orderId = try orderCollection.addDocument(from: orderDetails)
+            _ = try orderCollection.addDocument(from: orderDetails)
         } catch let error {
             print("Error writing orderdetails to Firestore: \(error)")
         }

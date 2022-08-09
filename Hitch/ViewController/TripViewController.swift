@@ -51,13 +51,14 @@ class TripViewController: UIViewController
         var orderCollection: Query?
         
         if (Constants.userType == Constants.userDriver) {
-            orderCollection = Firestore.firestore().collection("Orders");
+            orderCollection = Firestore.firestore().collection("Orders")
+                .whereField("driverDetails.driverId", isEqualTo: Auth.auth().currentUser?.uid as Any);
         } else {
             orderCollection = Firestore.firestore().collection("Orders")
                 .whereField("userId", isEqualTo: Auth.auth().currentUser?.uid as Any);
         }
         
-       orderCollection!
+        orderCollection!
             .addSnapshotListener { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting orders: \(err)")
@@ -67,29 +68,10 @@ class TripViewController: UIViewController
                         return
                     }
                     
-                    let orders = documents
+                    self.orders = documents
                         .compactMap { document -> Order in
                             return try! document.data(as: Order.self)
                         }
-                    
-                    if (Constants.userType == Constants.userDriver) {
-                        
-                        self.orders.removeAll()
-                        
-                        for order in orders {
-                            
-                            let pickupLocation = CLLocation(latitude: order.pickupLocation!.lat,
-                                longitude: order.pickupLocation!.long)
-                            
-                            let distanceInMeters = pickupLocation.distance(from: self.currentLoc!)
-                            
-                            if (distanceInMeters < self.range) {
-                                self.orders.append(order)
-                            }
-                        }
-                    } else {
-                        self.orders = orders
-                    }
                     
                     //Reload table on main thread asynchronously.
                     DispatchQueue.main.async {

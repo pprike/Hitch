@@ -54,7 +54,8 @@ class DriverHomeViewController: UIViewController
     
     func getNearbyOrders() {
         
-        let orderCollection = Firestore.firestore().collection("Orders");
+        let orderCollection = Firestore.firestore().collection("Orders")
+            .whereField("orderStatus", isEqualTo: Constants.orderPlaced);
         
        orderCollection
             .addSnapshotListener { [self] (querySnapshot, err) in
@@ -104,11 +105,20 @@ class DriverHomeViewController: UIViewController
             }
     }
     
+    @IBAction func backBtnCliked(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if (segue.identifier == "NearbyOrderDetailsViewControllerSegue") {
             
+            let driver = Driver(location: LocationDetails(lat: self.currentLoc!.coordinate.latitude,
+                                                          long: self.currentLoc!.coordinate.longitude,
+                                                          address: ""),
+                                driverId: Auth.auth().currentUser!.uid)
             let orderDetailsView = segue.destination as! OrderDetailsViewController
+            selectedOrder!.driverDetails = driver
             orderDetailsView.order = selectedOrder!
         }
     }
