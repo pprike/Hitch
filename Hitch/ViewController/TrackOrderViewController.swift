@@ -14,6 +14,11 @@ class TrackOrderViewController: UIViewController
 {
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var driverNameLbl: UILabel!
+    
+    @IBOutlet weak var driverContactLbl: UILabel!
+    
+    @IBOutlet weak var etaLbl: UILabel!
     var order : Order!
     
     override func viewDidLoad() {
@@ -27,7 +32,7 @@ class TrackOrderViewController: UIViewController
     }
     
     func drawRoute() {
-        
+                
         let orderCollection = Firestore.firestore().collection("Orders")
             .whereField("id", isEqualTo: self.order.id!);
         
@@ -54,6 +59,18 @@ class TrackOrderViewController: UIViewController
                 }
             }
                 
+        
+        let docRef = Firestore.firestore().collection("Users")
+            .document((order.driverDetails?.driverId)!)
+        
+        docRef.getDocument { (document, error) in
+            
+            if let document = document, document.exists {
+                self.driverNameLbl.text = (document.get("name") as! String);
+                self.driverContactLbl.text = (document.get("phone") as! String);
+            }
+        }
+        
         self.mapView.removeOverlays(self.mapView.overlays)
         self.mapView.removeAnnotations(self.mapView.annotations)
   
@@ -105,8 +122,15 @@ class TrackOrderViewController: UIViewController
             self.mapView.setVisibleMapRect(route.polyline.boundingMapRect,
                                            edgePadding: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30),
                                            animated: true)
+            
+            let (h, m, _) = self.secondsToHoursMinutesSeconds(seconds: Int(route.expectedTravelTime))
+            self.etaLbl.text = ("\(h) Hours, \(m) Minutes")
             self.mapView.showAnnotations(self.mapView.annotations, animated: true)
         }
+    }
+    
+    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+      return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
     
     func addAnnotation(_ mapItem: MKMapItem!, _ title: String) {

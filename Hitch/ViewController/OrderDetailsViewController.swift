@@ -125,7 +125,12 @@ class OrderDetailsViewController: UIViewController
                 
                 if let document = document, document.exists {
                     self.userNametxtF.text = (document.get("name") as! String);
-                    self.userEmailTxtF.text = (document.get("email") as! String);
+                    self.userEmailTxtF.text = (document.get("phone") as! String);
+                
+                    let image = document.get("profilePic") as! String;
+                    if image.isEmpty != true{
+                        self.profilePicImgView.loadFrom(URLAddress: image)
+                    }
                     
                     if (Constants.userType == Constants.userPatron) {
                         self.trackBtn.isEnabled = true
@@ -206,10 +211,10 @@ class OrderDetailsViewController: UIViewController
             
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action)-> Void in
                 self.navigationController?.popViewController(animated: true)
+                self.tabBarController?.selectedIndex = 1
             }))
             
             self.present(alert, animated: true, completion: nil)
-            self.tabBarController?.selectedIndex = 1
         } catch let error {
             print("Error updating order details to Firestore: \(error)")
         }

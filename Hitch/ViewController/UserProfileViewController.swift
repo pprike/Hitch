@@ -55,8 +55,11 @@ class UserProfileViewController : UIViewController{
                 self.emailLabel.text = document.get("email")as? String;
                 let age = document.get("age") as! Int;
                 self.ageLabel.text = "Age \(String(age))"
-                if(document.get("userType")as? String=="Driver"){
+                
+                if(document.get("userType")as? String == Constants.userDriver) {
                     self.driverTag.isHidden = false
+                } else {
+                    self.driverTag.isHidden = true
                 }
             } else {
                 print("User does not exist")
@@ -99,8 +102,6 @@ extension UserProfileViewController: UIDocumentPickerDelegate {
             return
         }
         
-//        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//        let sandboxFileURL = dir.appendingPathComponent(selectedFileURL.lastPathComponent)
         imagePath = selectedFileURL;
         print("FILE URL: \(String(describing: imagePath))");
         uploadToFirebase(fileUrls: imagePath, UID: userID!)

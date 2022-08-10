@@ -98,6 +98,7 @@ class OrderViewController: UIViewController{
       }()
     
     @IBAction func orderClicked(_ sender: Any) {
+        successflag = false
         paymentRequest.paymentSummaryItems = [PKPaymentSummaryItem(label: "Trip Payment", amount:  NSDecimalNumber(string:String(format: "%.2f",orderDetails.totalPrice!)))]
         let controller = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest)
                 if controller != nil {
@@ -119,12 +120,7 @@ extension OrderViewController : PKPaymentAuthorizationViewControllerDelegate {
             self.tabBarController?.selectedIndex = 1
         }))
         
-        let imageView = UIImageView(frame: CGRect(x: 220, y: 10, width: 40, height: 40))
-        let successGif = UIImage.gifImageWithName("success")
-        imageView.image = successGif;
-        alert.view.addSubview(imageView)
-        
-        if successflag {
+        if (successflag) {
             self.present(alert, animated: true, completion: nil)
         }        
     }
