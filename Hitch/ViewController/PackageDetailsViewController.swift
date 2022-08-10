@@ -13,8 +13,8 @@ class PackageDetailsViewController: UIViewController
     @IBOutlet weak var backButton: UIButton!
     
     @IBOutlet weak var itemNameTxtF: UITextField!
-    
-    @IBOutlet weak var categoryPicker: UIPickerView!
+        
+    @IBOutlet weak var categoryPopUpBtn: UIButton!
     
     @IBOutlet weak var weightTxtF: UITextField!
     
@@ -43,13 +43,29 @@ class PackageDetailsViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround();
-        categoryPicker.delegate = self
-        categoryPicker.dataSource = self
-        
-        categoryPicker.selectedRow(inComponent: 0)
-        
         nextBtn.isEnabled = disclaimerSwitch.isOn;
+        setCategoryPopUp()
+    }
+    
+    func setCategoryPopUp() {
         
+        categoryPopUpBtn.showsMenuAsPrimaryAction = true
+        categoryPopUpBtn.changesSelectionAsPrimaryAction = true
+        
+        let optionClosure = {(action: UIAction) in
+            self.selectedCategory = action.title
+        }
+        
+        categoryPopUpBtn.menu = UIMenu(children: [
+            
+            UIAction(title: "Documents", state: .on, handler: optionClosure),
+            UIAction(title: "Grocery / Food", handler: optionClosure),
+            UIAction(title: "Electronics", handler: optionClosure),
+            UIAction(title: "Household", handler: optionClosure),
+            UIAction(title: "Clothing", handler: optionClosure),
+            UIAction(title: "Office Supplies", handler: optionClosure),
+            UIAction(title: "Others", handler: optionClosure),
+        ])
     }
     
     @IBAction func disclamerValueChanged(_ sender: UISwitch) {
@@ -80,30 +96,11 @@ class PackageDetailsViewController: UIViewController
             orderView.orderDetails = self.orderDetails
         }
     }
+    @IBAction func stepperClicked(_ sender: UIStepper) {
+        bagOrPiecesTxtF.text = Int(sender.value).description
+    }
     
     @IBAction func backBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-    }
-}
-
-extension PackageDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource{
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1;
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Constants.categories.count;
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Constants.categories[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.selectedCategory = Constants.categories[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 40.0
     }
 }

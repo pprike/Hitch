@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import MapKit
 
-class TripViewController: UIViewController
+class MyOrdersViewController: UIViewController
 {
     @IBOutlet weak var tripListTable: UITableView!
     
@@ -22,8 +22,12 @@ class TripViewController: UIViewController
     
     var currentLoc: CLLocation?
     
+    @IBOutlet weak var earningsLbl: UILabel!
+    
     //Location manage to get the locations.
     let locationManager = CLLocationManager();
+    
+    var totalEarnings : Double! = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +77,17 @@ class TripViewController: UIViewController
                             return try! document.data(as: Order.self)
                         }
                     
+                    if (Constants.userType == Constants.userDriver) {
+                        for order in  self.orders {
+                            self.totalEarnings += (order.totalPrice! - order.convenienceFee!)
+                        }
+                        
+                        self.earningsLbl.isHidden = false
+                        self.earningsLbl.text = String(format: "$ %.2f", self.totalEarnings!)
+                    } else {
+                        self.earningsLbl.isHidden = true
+                    }
+                   
                     //Reload table on main thread asynchronously.
                     DispatchQueue.main.async {
                         self.tripListTable.reloadData()
@@ -92,18 +107,14 @@ class TripViewController: UIViewController
     }
 }
 
-extension TripViewController: UITableViewDelegate, UITableViewDataSource {
+extension MyOrdersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.orders.count;
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if (Constants.userType == Constants.userDriver) {
-            return "Nearby Orders"
-        } else {
-            return "Recent Orders"
-        }
+        return "Recent Orders"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -129,7 +140,7 @@ extension TripViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension TripViewController: CLLocationManagerDelegate {
+extension MyOrdersViewController: CLLocationManagerDelegate {
     
     // This delegate is used to update the source location location is updated.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

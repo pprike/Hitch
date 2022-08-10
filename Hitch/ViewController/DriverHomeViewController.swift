@@ -12,16 +12,17 @@ import MapKit
 
 class DriverHomeViewController: UIViewController
 {
-    
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var tripListTable: UITableView!
+    
+    @IBOutlet weak var filterPullDownButtom: UIButton!
     
     var orders = [Order]()
     
     var selectedOrder: Order?
     
-    var range: Double = 5000
+    var range: Double = 10000
     
     var currentLoc: CLLocation?
     
@@ -46,10 +47,40 @@ class DriverHomeViewController: UIViewController
         //Initializing default location when app opens.
         let defaultLocation : [CLLocation] = [CLLocation(latitude: 43.466667, longitude: -80.516670)];
         locationManager(locationManager, didUpdateLocations: defaultLocation);
+        setFilterPullDown()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getNearbyOrders();
+    }
+    
+    func setFilterPullDown() {
+        
+        filterPullDownButtom.showsMenuAsPrimaryAction = true
+        filterPullDownButtom.changesSelectionAsPrimaryAction = true
+        
+        let optionClosure = {(action: UIAction) in
+            
+            if (action.title == Constants.filterWithin10Kms) {
+                self.range = 10000
+                
+            } else if (action.title == Constants.filterWithin20Kms){
+                self.range = 20000
+            } else if (action.title == Constants.filterWithin50Kms) {
+                self.range = 50000
+            } else if (action.title == Constants.filterWithin100Kms) {
+                self.range = 100000
+            }
+            
+            self.getNearbyOrders()
+        }
+        
+        filterPullDownButtom.menu = UIMenu(children: [
+            UIAction(title: Constants.filterWithin10Kms, state: .on, handler: optionClosure),
+            UIAction(title: Constants.filterWithin20Kms, handler: optionClosure),
+            UIAction(title: Constants.filterWithin50Kms, handler: optionClosure),
+            UIAction(title: Constants.filterWithin100Kms, handler: optionClosure),
+        ])
     }
     
     func getNearbyOrders() {

@@ -27,4 +27,9 @@ struct Constants {
     static let orderPickedUp = "PICKED"
     static let orderComplete = "COMPLETE"
     static let orderCancelled = "CANCELLED"
+    
+    static let filterWithin10Kms = "Within 10 Kms"
+    static let filterWithin20Kms = "Within 20 kms"
+    static let filterWithin50Kms = "Within 50 kms"
+    static let filterWithin100Kms = "Within 100 Kms"
 }

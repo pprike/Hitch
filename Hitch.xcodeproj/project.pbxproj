@@ -27,7 +27,7 @@
 		47BB8FE928A2EB020086D470 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB8FE828A2EB020086D470 /* SuccessViewController.swift */; };
 		47BB8FEB28A2EF760086D470 /* GifLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB8FEA28A2EF760086D470 /* GifLoader.swift */; };
 		47BB8FED28A2F1D10086D470 /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = 47BB8FEC28A2F1D10086D470 /* success.gif */; };
-		4863A98F2898C1E7009A94B2 /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A98E2898C1E7009A94B2 /* TripViewController.swift */; };
+		4863A98F2898C1E7009A94B2 /* MyOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A98E2898C1E7009A94B2 /* MyOrdersViewController.swift */; };
 		4863A9912898D08E009A94B2 /* TripViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A9902898D08E009A94B2 /* TripViewCell.swift */; };
 		4863A9932898ED14009A94B2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A9922898ED14009A94B2 /* Constants.swift */; };
 		4863A9972899C42A009A94B2 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4863A9962899C42A009A94B2 /* FirebaseFirestoreSwift */; };
@@ -37,7 +37,7 @@
 		488D602A289103A800528EB2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 488D6029289103A800528EB2 /* FirebaseFirestore */; };
 		488D602F289103F300528EB2 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 488D602E289103F300528EB2 /* FirebaseFunctions */; };
 		48A94600288224BE00E288F5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A945FF288224BE00E288F5 /* SearchViewController.swift */; };
-		48A946032883546B00E288F5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A946022883546B00E288F5 /* MapViewController.swift */; };
+		48A946032883546B00E288F5 /* UserHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A946022883546B00E288F5 /* UserHomeViewController.swift */; };
 		48A9460528836DA800E288F5 /* OrderDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9460428836DA800E288F5 /* OrderDataModel.swift */; };
 		48B89C6728A0CCB40025360D /* DriverHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B89C6628A0CCB40025360D /* DriverHomeViewController.swift */; };
 		48B89C6928A2355D0025360D /* TrackOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B89C6828A2355D0025360D /* TrackOrderViewController.swift */; };
@@ -85,12 +85,12 @@
 		47BB8FE828A2EB020086D470 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		47BB8FEA28A2EF760086D470 /* GifLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifLoader.swift; sourceTree = "<group>"; };
 		47BB8FEC28A2F1D10086D470 /* success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = success.gif; sourceTree = "<group>"; };
-		4863A98E2898C1E7009A94B2 /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
+		4863A98E2898C1E7009A94B2 /* MyOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersViewController.swift; sourceTree = "<group>"; };
 		4863A9902898D08E009A94B2 /* TripViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewCell.swift; sourceTree = "<group>"; };
 		4863A9922898ED14009A94B2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4863A998289C6726009A94B2 /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
 		48A945FF288224BE00E288F5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		48A946022883546B00E288F5 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		48A946022883546B00E288F5 /* UserHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeViewController.swift; sourceTree = "<group>"; };
 		48A9460428836DA800E288F5 /* OrderDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDataModel.swift; sourceTree = "<group>"; };
 		48B89C6628A0CCB40025360D /* DriverHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverHomeViewController.swift; sourceTree = "<group>"; };
 		48B89C6828A2355D0025360D /* TrackOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackOrderViewController.swift; sourceTree = "<group>"; };
@@ -215,12 +215,12 @@
 			isa = PBXGroup;
 			children = (
 				48A945FF288224BE00E288F5 /* SearchViewController.swift */,
-				48A946022883546B00E288F5 /* MapViewController.swift */,
+				48A946022883546B00E288F5 /* UserHomeViewController.swift */,
 				4733ACB5288FB3340024BA39 /* SignUpViewController.swift */,
 				4733ACB7288FD0270024BA39 /* LoginViewController.swift */,
 				47B198B6287EA7940006C3D4 /* OrderViewController.swift */,
 				47B198B4287E46260006C3D4 /* PackageDetailsViewController.swift */,
-				4863A98E2898C1E7009A94B2 /* TripViewController.swift */,
+				4863A98E2898C1E7009A94B2 /* MyOrdersViewController.swift */,
 				4863A998289C6726009A94B2 /* OrderDetailsViewController.swift */,
 				48B89C6628A0CCB40025360D /* DriverHomeViewController.swift */,
 				47BB8FE328A212640086D470 /* UserProfileViewController.swift */,
@@ -389,8 +389,8 @@
 				476AF385285EE30F001DABFF /* Hitch.xcdatamodeld in Sources */,
 				48B89C6928A2355D0025360D /* TrackOrderViewController.swift in Sources */,
 				476AF37D285EE30F001DABFF /* SceneDelegate.swift in Sources */,
-				48A946032883546B00E288F5 /* MapViewController.swift in Sources */,
-				4863A98F2898C1E7009A94B2 /* TripViewController.swift in Sources */,
+				48A946032883546B00E288F5 /* UserHomeViewController.swift in Sources */,
+				4863A98F2898C1E7009A94B2 /* MyOrdersViewController.swift in Sources */,
 				47BB8FE928A2EB020086D470 /* SuccessViewController.swift in Sources */,
 				4863A9932898ED14009A94B2 /* Constants.swift in Sources */,
 				48B89C6728A0CCB40025360D /* DriverHomeViewController.swift in Sources */,

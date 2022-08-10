@@ -26,15 +26,11 @@ class UserProfileViewController : UIViewController{
     var imagePath: URL!
     let storage = Storage.storage()
     let userID = Auth.auth().currentUser?.uid;
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserInfo();
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        getUserInfo();
-//    }
     
     func getUserInfo(){
         if Auth.auth().currentUser != nil {
@@ -42,6 +38,7 @@ class UserProfileViewController : UIViewController{
              getUserFromFirebase(uid:Auth.auth().currentUser!.uid);
         }
     }
+    
     func getUserFromFirebase(uid: String)  {
      
         let docRef = db.collection("Users").document(uid)

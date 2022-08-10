@@ -18,7 +18,6 @@ class SuccessViewController: UIViewController{
     }
     @IBAction func backToHome(_ sender: Any) {
         self.dismiss(animated: true);
-         
-        // Send user to Home page or My Orders Page
+        navigationController?.popToRootViewController(animated: true)
     }
 }

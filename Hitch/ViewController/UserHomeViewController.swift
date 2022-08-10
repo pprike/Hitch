@@ -5,18 +5,19 @@
 //  Created by Parikshit Murria on 2022-07-16.
 //
 
-
 import UIKit
 import MapKit
 import FirebaseAuth
 
-class MapViewController: UIViewController, UITextFieldDelegate {
+class UserHomeViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var pickupLocTxtF: UITextField!
     
     @IBOutlet weak var destLocTxtF: UITextField!
+    
+    @IBOutlet weak var nextBtn: UIButton!
     
     private var selectedTxtField : UITextField!
     
@@ -42,9 +43,8 @@ class MapViewController: UIViewController, UITextFieldDelegate {
         
         mapView.showsUserLocation = true;
         mapView.isZoomEnabled = true
-        
-        pickupLocTxtF.delegate = self;
-        destLocTxtF.delegate = self;
+    
+        nextBtn.isEnabled = false
         
         self.mapView.delegate = self
         
@@ -104,6 +104,7 @@ class MapViewController: UIViewController, UITextFieldDelegate {
             
             
             if ( self.srcMapItem != nil && self.destMapItem != nil ) {
+                self.nextBtn.isEnabled = true
                 let directionRequest = MKDirections.Request()
                 directionRequest.source = self.srcMapItem
                 directionRequest.destination = self.destMapItem
@@ -129,12 +130,14 @@ class MapViewController: UIViewController, UITextFieldDelegate {
                     self.orderDetails.distance = route.distance
                     self.orderDetails.eta = route.expectedTravelTime
                 }
+            } else {
+                self.nextBtn.isEnabled = false
             }
         }
     }
 }
 
-extension MapViewController : MKMapViewDelegate {
+extension UserHomeViewController : MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
@@ -144,7 +147,7 @@ extension MapViewController : MKMapViewDelegate {
     }
 }
 
-extension MapViewController: CLLocationManagerDelegate {
+extension UserHomeViewController: CLLocationManagerDelegate {
     
     // This delegate is used to update the source location location is updated.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

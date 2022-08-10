@@ -80,15 +80,6 @@ class OrderViewController: UIViewController{
         
         dateFormatter.dateFormat = "HH:mm a"
         orderDetails.orderTime = dateFormatter.string(from: Date())
-        
-        orderDetails.orderStatus = Constants.orderPlaced
-        
-//        do {
-//            let orderCollection = Firestore.firestore().collection("Orders");
-//            _ = try orderCollection.addDocument(from: orderDetails)
-//        } catch let error {
-//            print("Error writing orderdetails to Firestore: \(error)")
-//        }
     }
     
     @IBAction func backBtnCliked(_ sender: Any) {
@@ -103,7 +94,6 @@ class OrderViewController: UIViewController{
           request.merchantCapabilities = .capability3DS
           request.countryCode = "CA"
           request.currencyCode = "CAD"
-//        request.paymentSummaryItems = [PKPaymentSummaryItem(label: "Trip Payment", amount: NSDecimalNumber(value: orderDetails.totalPrice!))]
           return request
       }()
     
@@ -115,20 +105,30 @@ class OrderViewController: UIViewController{
                     present(controller!, animated: true, completion: nil)
                 }
     }
-    
 }
  
 extension OrderViewController : PKPaymentAuthorizationViewControllerDelegate {
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+        
         controller.dismiss(animated: true, completion: nil);
+        
         let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
         let viewController = mainStoryboard.instantiateViewController(withIdentifier: "successView")
         
         if let sheet = viewController.sheetPresentationController {
             sheet.detents = [ .medium()]
         }
+        
         if successflag {
-        present(viewController, animated: true)
+            do {
+                orderDetails.orderStatus = Constants.orderPlaced
+
+                let orderCollection = Firestore.firestore().collection("Orders");
+                _ = try orderCollection.addDocument(from: orderDetails)
+                present(viewController, animated: true)
+            } catch let error {
+                print("Error writing order details to Firestore: \(error)")
+            }
         }
     }
     
@@ -141,13 +141,5 @@ extension OrderViewController : PKPaymentAuthorizationViewControllerDelegate {
         } catch let error {
             print("Error writing orderdetails to Firestore: \(error)")
         }
-
-//        let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
-//        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "successView")
-//
-//        if let sheet = viewController.sheetPresentationController {
-//            sheet.detents = [ .medium()]
-//        }
-//        present(viewController, animated: true)
     }         
 }
