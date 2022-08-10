@@ -20,6 +20,18 @@ class TripViewCell: UITableViewCell {
     
     @IBOutlet weak var orderStatus: UILabel!
     
+    @IBOutlet weak var orderItemName: UILabel!
+    
+    @IBOutlet weak var categoryImageView: UIImageView!
+    
+    @IBOutlet weak var imageBgView: UIView!
+     
+    @IBOutlet weak var orderStatusTag: UIButton!
+    
+    @IBOutlet weak var driversEarning: UILabel!
+    
+    @IBOutlet weak var tripDistance: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 

@@ -122,7 +122,6 @@ extension OrderViewController : PKPaymentAuthorizationViewControllerDelegate {
         if successflag {
             do {
                 orderDetails.orderStatus = Constants.orderPlaced
-
                 let orderCollection = Firestore.firestore().collection("Orders");
                 _ = try orderCollection.addDocument(from: orderDetails)
                 present(viewController, animated: true)

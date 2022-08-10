@@ -58,13 +58,13 @@ class PackageDetailsViewController: UIViewController
         
         categoryPopUpBtn.menu = UIMenu(children: [
             
-            UIAction(title: "Documents", state: .on, handler: optionClosure),
-            UIAction(title: "Grocery / Food", handler: optionClosure),
-            UIAction(title: "Electronics", handler: optionClosure),
-            UIAction(title: "Household", handler: optionClosure),
-            UIAction(title: "Clothing", handler: optionClosure),
-            UIAction(title: "Office Supplies", handler: optionClosure),
-            UIAction(title: "Others", handler: optionClosure),
+            UIAction(title: Constants.documents, state: .on, handler: optionClosure),
+            UIAction(title: Constants.grocery, handler: optionClosure),
+            UIAction(title: Constants.electronics, handler: optionClosure),
+            UIAction(title: Constants.household, handler: optionClosure),
+            UIAction(title: Constants.clothing, handler: optionClosure),
+            UIAction(title: Constants.officeSupplies, handler: optionClosure),
+            UIAction(title: Constants.others, handler: optionClosure),
         ])
     }
     

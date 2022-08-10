@@ -169,15 +169,53 @@ extension DriverHomeViewController: UITableViewDelegate, UITableViewDataSource {
         //This helps in reusing the created cells
         let cell = tableView.dequeueReusableCell(withIdentifier: "TripViewCell", for: indexPath) as! TripViewCell;
         
-        //setting labels on cell.
-        cell.orderId?.text = self.orders[indexPath.row].id;
+        cell.orderItemName?.text = self.orders[indexPath.row].packageDetails?.itemName
+        let orderSubID = self.orders[indexPath.row].id?.prefix(8 );
+        cell.orderId?.text = String(orderSubID!);
+        cell.categoryImageView.image = UIImage(systemName: "cloud")
         cell.orderDate?.text = self.orders[indexPath.row].orderDate;
         cell.orderTime?.text = self.orders[indexPath.row].orderTime;
         
         cell.pickupLoc?.text = self.orders[indexPath.row].pickupLocation?.address;
         cell.dropLoc?.text = self.orders[indexPath.row].dropLocation?.address;
-        
-        cell.orderStatus?.text = self.orders[indexPath.row].orderStatus;
+        let tripKm = self.orders[indexPath.row].distance! / 1000;
+        cell.tripDistance.text = String(format: "%.2f Km", tripKm);
+        let driversEarnings = Double(self.orders[indexPath.row].totalPrice!) - Double(self.orders[indexPath.row].convenienceFee!);
+        cell.driversEarning?.text = String(format: "$ %.2f", driversEarnings);
+        cell.orderStatusTag?.setTitle(self.orders[indexPath.row].orderStatus, for: .normal)
+        cell.orderStatusTag?.titleLabel?.font =  UIFont(name: "system", size: 12)
+        cell.orderStatusTag?.layoutIfNeeded();
+        print(self.orders[indexPath.row].packageDetails?.category as Any)
+        switch self.orders[indexPath.row].packageDetails?.category{
+        case Constants.documents:
+            cell.categoryImageView.image = UIImage(systemName: "folder");
+            cell.imageBgView.backgroundColor = Constants.colorOne;
+            break
+        case Constants.grocery:
+            cell.categoryImageView.image = UIImage(systemName: "cup.and.saucer");
+            cell.imageBgView.backgroundColor = Constants.colorTwo;
+            break
+        case Constants.electronics:
+            cell.categoryImageView.image = UIImage(systemName: "ipod");
+            cell.imageBgView.backgroundColor = Constants.colorThree ;
+            break
+        case Constants.clothing:
+            cell.categoryImageView.image = UIImage(systemName: "tshirt");
+            cell.imageBgView.backgroundColor = Constants.colorFour;
+            break
+        case Constants.officeSupplies:
+            cell.categoryImageView.image = UIImage(systemName: "pencil.tip.crop.circle");
+            cell.imageBgView.backgroundColor = Constants.colorFive;
+            break
+        case Constants.household:
+            cell.categoryImageView.image = UIImage(systemName: "house");
+            cell.imageBgView.backgroundColor = Constants.colorsix;
+            break
+        default:
+            cell.categoryImageView.image = UIImage(systemName: "line.3.horizontal.decrease.circle");
+            cell.imageBgView.backgroundColor = Constants.colorOne
+            break
+        }
         
         return cell;
     }
