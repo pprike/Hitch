@@ -200,6 +200,16 @@ class OrderDetailsViewController: UIViewController
             self.order!.orderStatus = nextOrderState
             let orderCollection = Firestore.firestore().collection("Orders");
             _ = try orderCollection.document(order!.id!).setData(from: order!)
+            
+            let alert = UIAlertController(title: "Order Details", message: "Order Status Updated",
+                                          preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action)-> Void in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+            self.tabBarController?.selectedIndex = 1
         } catch let error {
             print("Error updating order details to Firestore: \(error)")
         }
@@ -216,7 +226,6 @@ class OrderDetailsViewController: UIViewController
 }
 
 extension OrderDetailsViewController : MKMapViewDelegate {
-    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.lineWidth = 5

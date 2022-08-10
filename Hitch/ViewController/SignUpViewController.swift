@@ -68,25 +68,16 @@ class SignUpViewController: UIViewController {
             if((filePath) != nil){
                 uploadToFirebase(fileUrls: filePath, UID: user!.uid);
             }
-//          userCollection.addDocument(data: User.dictionary);
-//            var screen = "mainBottomNav";
-//            if type == Constants.userDriver{
-//                screen = "driverMainTab"
-//            }
-            let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
-            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabController") as! UITabBarController
             
-            if type == Constants.userDriver {
-                Constants.userType = Constants.userDriver
-                viewController.viewControllers?.remove(at: 0)
-            } else {
-                Constants.userType = Constants.userPatron
-            }
-                            
-            UIApplication.shared.windows.first?.rootViewController = viewController
-            UIApplication.shared.windows.first?.makeKeyAndVisible()
+            let alert = UIAlertController(title: "Sign Up", message: "User Registered Successfully",
+                                          preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action)-> Void in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
         }
-        
     }
 
     @IBAction func userTypeChanged(_ sender: Any) {

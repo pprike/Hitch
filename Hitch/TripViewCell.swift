@@ -17,9 +17,7 @@ class TripViewCell: UITableViewCell {
     @IBOutlet weak var orderDate: UILabel!
     
     @IBOutlet weak var orderTime: UILabel!
-    
-    @IBOutlet weak var orderStatus: UILabel!
-    
+        
     @IBOutlet weak var orderItemName: UILabel!
     
     @IBOutlet weak var categoryImageView: UIImageView!

@@ -112,29 +112,28 @@ extension OrderViewController : PKPaymentAuthorizationViewControllerDelegate {
         
         controller.dismiss(animated: true, completion: nil);
         
-        let mainStoryboard = UIStoryboard(name:"Main", bundle: nil)
-        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "successView")
+        let alert = UIAlertController(title: "Order Status", message: "Payment Successful", preferredStyle: .actionSheet)
         
-        if let sheet = viewController.sheetPresentationController {
-            sheet.detents = [ .medium()]
-        }
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action)-> Void in
+            self.navigationController?.popToRootViewController(animated: true)
+            self.tabBarController?.selectedIndex = 1
+        }))
+        
+        let imageView = UIImageView(frame: CGRect(x: 220, y: 10, width: 40, height: 40))
+        let successGif = UIImage.gifImageWithName("success")
+        imageView.image = successGif;
+        alert.view.addSubview(imageView)
         
         if successflag {
-            do {
-                orderDetails.orderStatus = Constants.orderPlaced
-                let orderCollection = Firestore.firestore().collection("Orders");
-                _ = try orderCollection.addDocument(from: orderDetails)
-                present(viewController, animated: true)
-            } catch let error {
-                print("Error writing order details to Firestore: \(error)")
-            }
-        }
+            self.present(alert, animated: true, completion: nil)
+        }        
     }
     
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
         completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
         successflag = true;
         do {
+            orderDetails.orderStatus = Constants.orderPlaced
             let orderCollection = Firestore.firestore().collection("Orders");
             _ = try orderCollection.addDocument(from: orderDetails)
         } catch let error {

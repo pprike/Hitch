@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import MapKit
+import Firebase
 
 class TrackOrderViewController: UIViewController
 {
@@ -27,6 +28,32 @@ class TrackOrderViewController: UIViewController
     
     func drawRoute() {
         
+        let orderCollection = Firestore.firestore().collection("Orders")
+            .whereField("id", isEqualTo: self.order.id!);
+        
+        orderCollection
+            .addSnapshotListener { [self] (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting orders: \(err)")
+                } else {
+                    guard let documents = querySnapshot?.documents else {
+                        print("no orders found")
+                        return
+                    }
+                    
+                    let orders = documents
+                        .compactMap { document -> Order in
+                            return try! document.data(as: Order.self)
+                        }
+                    
+                    for order in orders {
+                        if (self.order.id == order.id) {
+                            self.order = order
+                        }
+                    }
+                }
+            }
+                
         self.mapView.removeOverlays(self.mapView.overlays)
         self.mapView.removeAnnotations(self.mapView.annotations)
   

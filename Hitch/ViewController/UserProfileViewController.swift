@@ -85,6 +85,10 @@ class UserProfileViewController : UIViewController{
         }
         
     }
+    
+    @IBAction func myOrdersClicked(_ sender: Any) {
+        self.tabBarController?.selectedIndex = 1
+    }
 }
 
 extension UserProfileViewController: UIDocumentPickerDelegate {

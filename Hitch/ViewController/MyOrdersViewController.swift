@@ -78,6 +78,7 @@ class MyOrdersViewController: UIViewController
                         }
                     
                     if (Constants.userType == Constants.userDriver) {
+                        self.totalEarnings = 0
                         for order in  self.orders {
                             self.totalEarnings += (order.totalPrice! - order.convenienceFee!)
                         }
@@ -131,10 +132,25 @@ extension MyOrdersViewController: UITableViewDelegate, UITableViewDataSource {
         cell.pickupLoc?.text = self.orders[indexPath.row].pickupLocation?.address;
         cell.dropLoc?.text = self.orders[indexPath.row].dropLocation?.address;
         
-        cell.orderStatusTag?.setTitle(self.orders[indexPath.row].orderStatus, for: .normal)
-        cell.orderStatusTag.titleLabel?.font =  UIFont(name: "system", size: 12)
-        cell.orderStatusTag.layoutIfNeeded();
-        print(self.orders[indexPath.row].packageDetails?.category as Any)
+        var btnStatusTitle : String = "Pending"
+        var btnColor : UIColor
+        
+        btnColor = UIColor.systemRed
+        let orderStatus = self.orders[indexPath.row].orderStatus!
+        
+        if ( orderStatus == Constants.orderAssigned) {
+            btnStatusTitle = "Assigned"
+            btnColor = UIColor.systemGreen
+        } else if ( orderStatus == Constants.orderPickedUp) {
+            btnStatusTitle = "Picked"
+            btnColor = UIColor.systemYellow
+        } else if ( orderStatus == Constants.orderComplete) {
+            btnStatusTitle = "Completed"
+            btnColor = UIColor.systemBlue
+        }
+        
+        cell.orderStatusTag?.setTitle(btnStatusTitle, for: .normal)
+
         switch self.orders[indexPath.row].packageDetails?.category{
         case Constants.documents:
             cell.categoryImageView.image = UIImage(systemName: "folder");
