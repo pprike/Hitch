@@ -43,8 +43,13 @@ class PackageDetailsViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround();
+        disclaimerSwitch.isOn = false
         nextBtn.isEnabled = disclaimerSwitch.isOn;
-        setCategoryPopUp()
+        setCategoryPopUp();
+        weightTxtF.keyboardType = .numberPad
+        lengthTxtF.keyboardType = .numberPad
+        heightTxtF.keyboardType = .numberPad
+        widthTxtF.keyboardType = .numberPad
     }
     
     func setCategoryPopUp() {
@@ -57,8 +62,8 @@ class PackageDetailsViewController: UIViewController
         }
         
         categoryPopUpBtn.menu = UIMenu(children: [
-            
-            UIAction(title: Constants.documents, state: .on, handler: optionClosure),
+            UIAction(title: "Select item category", state: .mixed, handler: optionClosure),
+            UIAction(title: Constants.documents, handler: optionClosure),
             UIAction(title: Constants.grocery, handler: optionClosure),
             UIAction(title: Constants.electronics, handler: optionClosure),
             UIAction(title: Constants.household, handler: optionClosure),
@@ -69,7 +74,6 @@ class PackageDetailsViewController: UIViewController
     }
     
     @IBAction func disclamerValueChanged(_ sender: UISwitch) {
-        
         nextBtn.isEnabled = sender.isOn
     }
     
@@ -96,11 +100,30 @@ class PackageDetailsViewController: UIViewController
             orderView.orderDetails = self.orderDetails
         }
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+            return validatedInputs()
+    }
+    
+    func validatedInputs() -> Bool{
+        if(self.itemNameTxtF.text?.isEmpty == true || self.selectedCategory.isEmpty == true || self.selectedCategory == "Select item category" || self.weightTxtF.text?.isEmpty == true || self.bagOrPiecesTxtF.text?.isEmpty == true || self.lengthTxtF.text?.isEmpty == true || self.weightTxtF.text?.isEmpty == true || self.heightTxtF.text?.isEmpty == true){
+            self.displayMessage(title: "Data Required", msg: "Please fill all data. Measures can be approx")
+            return false
+        }
+        return true;
+    }
     @IBAction func stepperClicked(_ sender: UIStepper) {
         bagOrPiecesTxtF.text = Int(sender.value).description
     }
     
     @IBAction func backBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    func displayMessage (title: String,msg: String){
+
+        let alert = UIAlertController(title: title,message: msg,preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default,handler: { _ in
+             print("OK tap")}))
+        present(alert, animated: true, completion: nil)
     }
 }

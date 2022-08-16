@@ -68,8 +68,8 @@ class LoginViewController: UIViewController {
         if Auth.auth().currentUser != nil {
             print(Auth.auth().currentUser?.uid ?? "");
              getUserFromFirebase(uid:Auth.auth().currentUser!.uid);
-//            let defaults = UserDefaults.standard
-//            defaults.set(true, forKey: "isLoggedIn");
+            let defaults = UserDefaults.standard
+            defaults.set(true, forKey: "isLoggedIn");
         }
     }
     

@@ -27,6 +27,7 @@
 		47BB8FE928A2EB020086D470 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB8FE828A2EB020086D470 /* SuccessViewController.swift */; };
 		47BB8FEB28A2EF760086D470 /* GifLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB8FEA28A2EF760086D470 /* GifLoader.swift */; };
 		47BB8FED28A2F1D10086D470 /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = 47BB8FEC28A2F1D10086D470 /* success.gif */; };
+		47C2BFDE28AC591F00ABC5B5 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C2BFDD28AC591F00ABC5B5 /* LandingViewController.swift */; };
 		4863A98F2898C1E7009A94B2 /* MyOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A98E2898C1E7009A94B2 /* MyOrdersViewController.swift */; };
 		4863A9912898D08E009A94B2 /* TripViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A9902898D08E009A94B2 /* TripViewCell.swift */; };
 		4863A9932898ED14009A94B2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863A9922898ED14009A94B2 /* Constants.swift */; };
@@ -85,6 +86,7 @@
 		47BB8FE828A2EB020086D470 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		47BB8FEA28A2EF760086D470 /* GifLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifLoader.swift; sourceTree = "<group>"; };
 		47BB8FEC28A2F1D10086D470 /* success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = success.gif; sourceTree = "<group>"; };
+		47C2BFDD28AC591F00ABC5B5 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		4863A98E2898C1E7009A94B2 /* MyOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersViewController.swift; sourceTree = "<group>"; };
 		4863A9902898D08E009A94B2 /* TripViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewCell.swift; sourceTree = "<group>"; };
 		4863A9922898ED14009A94B2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				47BB8FE328A212640086D470 /* UserProfileViewController.swift */,
 				48B89C6828A2355D0025360D /* TrackOrderViewController.swift */,
 				47BB8FE828A2EB020086D470 /* SuccessViewController.swift */,
+				47C2BFDD28AC591F00ABC5B5 /* LandingViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4733ACB6288FB3340024BA39 /* SignUpViewController.swift in Sources */,
+				47C2BFDE28AC591F00ABC5B5 /* LandingViewController.swift in Sources */,
 				48A9460528836DA800E288F5 /* OrderDataModel.swift in Sources */,
 				47B198B7287EA7940006C3D4 /* OrderViewController.swift in Sources */,
 				4863A999289C6726009A94B2 /* OrderDetailsViewController.swift in Sources */,
