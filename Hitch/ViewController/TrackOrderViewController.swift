@@ -19,6 +19,9 @@ class TrackOrderViewController: UIViewController
     @IBOutlet weak var driverContactLbl: UILabel!
     
     @IBOutlet weak var etaLbl: UILabel!
+    
+    @IBOutlet weak var userProfileImgView: UIImageView!
+    
     var order : Order!
     
     override func viewDidLoad() {
@@ -68,6 +71,11 @@ class TrackOrderViewController: UIViewController
             if let document = document, document.exists {
                 self.driverNameLbl.text = (document.get("name") as! String);
                 self.driverContactLbl.text = (document.get("phone") as! String);
+                
+                let image = document.get("profilePic") as! String;
+                if image.isEmpty != true{
+                    self.userProfileImgView.loadFrom(URLAddress: image)
+                }
             }
         }
         

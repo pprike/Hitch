@@ -2896,6 +2896,7 @@
                         <outlet property="driverNameLbl" destination="T7X-Ba-lm6" id="VVv-iJ-Oqy"/>
                         <outlet property="etaLbl" destination="UXI-bz-7Zq" id="Voa-HL-NXT"/>
                         <outlet property="mapView" destination="aQ7-Xt-NrD" id="W16-3T-ubd"/>
+                        <outlet property="userProfileImgView" destination="0wF-ex-5xw" id="rGO-OT-vJP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gne-5Q-HAf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
