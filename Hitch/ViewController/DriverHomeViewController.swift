@@ -224,6 +224,29 @@ extension DriverHomeViewController: UITableViewDelegate, UITableViewDataSource {
         self.selectedOrder = orders[indexPath.row]
         performSegue(withIdentifier: "NearbyOrderDetailsViewControllerSegue", sender: indexPath)
     }
+    
+    func updateDriverLocation(newLocation: CLLocation){
+        let driversOrderCollection = Firestore.firestore().collection("Orders")
+            .whereField("driverDetails.driverId", isEqualTo: Auth.auth().currentUser?.uid as Any);
+        
+        driversOrderCollection .getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    document.reference.updateData(["driverDetails" :
+                                                        [
+                                                            "driverId":document.get("driverDetails.driverId"),
+                                                            "location":
+                                                                ["lat":newLocation.coordinate.latitude,"long":newLocation.coordinate.longitude,"address":"",]
+                                                        ]
+                                                  ])
+                }
+            }
+        
+        }
+    }
 }
 
 extension DriverHomeViewController: CLLocationManagerDelegate {
@@ -235,6 +258,7 @@ extension DriverHomeViewController: CLLocationManagerDelegate {
             
             currentLoc = location
             self.getNearbyOrders()
+            self.updateDriverLocation(newLocation: location)
             zoom(location)
         }
     }

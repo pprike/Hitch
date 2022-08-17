@@ -24,6 +24,8 @@ class TrackOrderViewController: UIViewController
     
     var order : Order!
     
+//    var driverMapItem : MKMapItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,33 +34,112 @@ class TrackOrderViewController: UIViewController
     
     override func viewWillAppear(_ animated: Bool) {
         drawRoute()
+        
+      
+        
     }
     
     func drawRoute() {
                 
-        let orderCollection = Firestore.firestore().collection("Orders")
-            .whereField("id", isEqualTo: self.order.id!);
+//        let orderCollection = Firestore.firestore().collection("Orders")
+//            .whereField("id", isEqualTo: self.order.id!);
+//
+//        orderCollection
+//            .addSnapshotListener { [self] (querySnapshot, err) in
+//                if let err = err {
+//                    print("Error getting orders: \(err)")
+//                } else {
+//                    guard let documents = querySnapshot?.documents else {
+//                        print("no orders found")
+//                        return
+//                    }
+//                    print("something changes");
+//                    let orders = documents
+//                        .compactMap { document -> Order in
+//                            return try! document.data(as: Order.self)
+//                        }
+//
+//                    for order in orders {
+//                        if (self.order.id == order.id) {
+//                            self.order = order
+//                        }
+//                    }
+//                }
+//            }
+        let orderCollection = Firestore.firestore().collection("Orders").document(self.order.id!)
+
         
         orderCollection
             .addSnapshotListener { [self] (querySnapshot, err) in
                 if let err = err {
                     print("Error getting orders: \(err)")
                 } else {
-                    guard let documents = querySnapshot?.documents else {
+                    guard let documents = querySnapshot else {
                         print("no orders found")
                         return
                     }
-                    print("something changes");
-                    let orders = documents
-                        .compactMap { document -> Order in
-                            return try! document.data(as: Order.self)
-                        }
                     
-                    for order in orders {
-                        if (self.order.id == order.id) {
-                            self.order = order
-                        }
+                    let orders = try! documents.data(as: Order.self)
+                    self.order = orders
+                    
+                    self.mapView.removeOverlays(self.mapView.overlays)
+                    self.mapView.removeAnnotations(self.mapView.annotations)
+              
+                    let directionRequest = MKDirections.Request()
+                    
+                    let srcMapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(
+                        latitude: self.order!.pickupLocation!.lat,
+                        longitude: self.order!.pickupLocation!.long)))
+                    
+                    let destMapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(
+                        latitude: self.order!.dropLocation!.lat,
+                        longitude: self.order!.dropLocation!.long)))
+                    
+                    let driverMapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(
+                        latitude: self.order!.driverDetails!.location!.lat,
+                        longitude: self.order!.driverDetails!.location!.long)))
+                    
+                    print("something changes \(self.order!.driverDetails!.location!.long)");
+
+                    self.addAnnotation(srcMapItem, "Pickup")
+                    self.addAnnotation(destMapItem, "Drop")
+                    
+                    if ( order!.orderStatus == Constants.orderPlaced) {
+                        directionRequest.source = srcMapItem
+                        directionRequest.destination = destMapItem
+                    } else if ( order!.orderStatus == Constants.orderAssigned) {
+                        self.addAnnotation(driverMapItem, "Driver")
+                        directionRequest.source = driverMapItem
+                        directionRequest.destination = srcMapItem
+                    } else if ( order!.orderStatus == Constants.orderPickedUp) {
+                        self.addAnnotation(driverMapItem, "Driver")
+                        directionRequest.source = driverMapItem
+                        directionRequest.destination = destMapItem
                     }
+                    
+                    directionRequest.transportType = .automobile
+                    
+                    let direction = MKDirections(request: directionRequest)
+                    
+                    direction.calculate { (response, error) in
+                        guard let response =  response else {
+                            if let error = error {
+                                print("Error in getting directions: \(error.localizedDescription)")
+                            }
+                            
+                            return
+                        }
+                        
+                        let route = response.routes[0]
+                        self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
+                        self.mapView.setVisibleMapRect(route.polyline.boundingMapRect,
+                                                       edgePadding: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30),
+                                                       animated: false)
+                        
+                        let (h, m, _) = self.secondsToHoursMinutesSeconds(seconds: Int(route.expectedTravelTime))
+                        self.etaLbl.text = ("\(h) Hours, \(m) Minutes")
+                        self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+                  
                 }
             }
                 
@@ -79,61 +160,61 @@ class TrackOrderViewController: UIViewController
             }
         }
         
-        self.mapView.removeOverlays(self.mapView.overlays)
-        self.mapView.removeAnnotations(self.mapView.annotations)
-  
-        let directionRequest = MKDirections.Request()
-        
-        let srcMapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(
-            latitude: self.order!.pickupLocation!.lat,
-            longitude: self.order!.pickupLocation!.long)))
-        
-        let destMapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(
-            latitude: self.order!.dropLocation!.lat,
-            longitude: self.order!.dropLocation!.long)))
-        
-        let driverMapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(
-            latitude: self.order!.driverDetails!.location!.lat,
-            longitude: self.order!.driverDetails!.location!.long)))
-
-        self.addAnnotation(srcMapItem, "Pickup")
-        self.addAnnotation(destMapItem, "Drop")
-        
-        if ( order!.orderStatus == Constants.orderPlaced) {
-            directionRequest.source = srcMapItem
-            directionRequest.destination = destMapItem
-        } else if ( order!.orderStatus == Constants.orderAssigned) {
-            self.addAnnotation(driverMapItem, "Driver")
-            directionRequest.source = driverMapItem
-            directionRequest.destination = srcMapItem
-        } else if ( order!.orderStatus == Constants.orderPickedUp) {
-            self.addAnnotation(driverMapItem, "Driver")
-            directionRequest.source = driverMapItem
-            directionRequest.destination = destMapItem
-        }
-        
-        directionRequest.transportType = .automobile
-        
-        let direction = MKDirections(request: directionRequest)
-        
-        direction.calculate { (response, error) in
-            guard let response =  response else {
-                if let error = error {
-                    print("Error in getting directions: \(error.localizedDescription)")
-                }
-                
-                return
-            }
-            
-            let route = response.routes[0]
-            self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
-            self.mapView.setVisibleMapRect(route.polyline.boundingMapRect,
-                                           edgePadding: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30),
-                                           animated: true)
-            
-            let (h, m, _) = self.secondsToHoursMinutesSeconds(seconds: Int(route.expectedTravelTime))
-            self.etaLbl.text = ("\(h) Hours, \(m) Minutes")
-            self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+//        self.mapView.removeOverlays(self.mapView.overlays)
+//        self.mapView.removeAnnotations(self.mapView.annotations)
+//
+//        let directionRequest = MKDirections.Request()
+//
+//        let srcMapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(
+//            latitude: self.order!.pickupLocation!.lat,
+//            longitude: self.order!.pickupLocation!.long)))
+//
+//        let destMapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(
+//            latitude: self.order!.dropLocation!.lat,
+//            longitude: self.order!.dropLocation!.long)))
+//
+//        let driverMapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(
+//            latitude: self.order!.driverDetails!.location!.lat,
+//            longitude: self.order!.driverDetails!.location!.long)))
+//
+//        self.addAnnotation(srcMapItem, "Pickup")
+//        self.addAnnotation(destMapItem, "Drop")
+//
+//        if ( order!.orderStatus == Constants.orderPlaced) {
+//            directionRequest.source = srcMapItem
+//            directionRequest.destination = destMapItem
+//        } else if ( order!.orderStatus == Constants.orderAssigned) {
+//            self.addAnnotation(driverMapItem, "Driver")
+//            directionRequest.source = driverMapItem
+//            directionRequest.destination = srcMapItem
+//        } else if ( order!.orderStatus == Constants.orderPickedUp) {
+//            self.addAnnotation(driverMapItem, "Driver")
+//            directionRequest.source = driverMapItem
+//            directionRequest.destination = destMapItem
+//        }
+//
+//        directionRequest.transportType = .automobile
+//
+//        let direction = MKDirections(request: directionRequest)
+//
+//        direction.calculate { (response, error) in
+//            guard let response =  response else {
+//                if let error = error {
+//                    print("Error in getting directions: \(error.localizedDescription)")
+//                }
+//
+//                return
+//            }
+//
+//            let route = response.routes[0]
+//            self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
+//            self.mapView.setVisibleMapRect(route.polyline.boundingMapRect,
+//                                           edgePadding: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30),
+//                                           animated: true)
+//
+//            let (h, m, _) = self.secondsToHoursMinutesSeconds(seconds: Int(route.expectedTravelTime))
+//            self.etaLbl.text = ("\(h) Hours, \(m) Minutes")
+//            self.mapView.showAnnotations(self.mapView.annotations, animated: true)
         }
     }
 
