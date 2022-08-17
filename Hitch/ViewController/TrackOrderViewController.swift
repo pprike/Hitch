@@ -48,7 +48,7 @@ class TrackOrderViewController: UIViewController
                         print("no orders found")
                         return
                     }
-                    
+                    print("something changes");
                     let orders = documents
                         .compactMap { document -> Order in
                             return try! document.data(as: Order.self)
@@ -136,6 +136,7 @@ class TrackOrderViewController: UIViewController
             self.mapView.showAnnotations(self.mapView.annotations, animated: true)
         }
     }
+
     
     func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
       return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)

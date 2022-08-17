@@ -1819,7 +1819,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9T-zx-Jh9">
-                                                    <rect key="frame" x="274.66666666666669" y="55.666666666666657" width="66.666666666666686" height="24"/>
+                                                    <rect key="frame" x="274.66666666666669" y="50.666666666666664" width="66.666666666666686" height="23.999999999999993"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="1R3-S5-sGS"/>
                                                     </constraints>
@@ -1921,7 +1921,7 @@
                                                 <constraint firstItem="kat-xc-zZH" firstAttribute="centerY" secondItem="FYL-QW-Ndv" secondAttribute="centerY" id="g3X-aI-Lkm"/>
                                                 <constraint firstItem="JWj-Q3-Q3L" firstAttribute="leading" secondItem="caz-60-qD7" secondAttribute="leading" constant="30" id="l82-Wg-XrQ"/>
                                                 <constraint firstItem="13Z-GY-7rr" firstAttribute="centerY" secondItem="JWj-Q3-Q3L" secondAttribute="centerY" id="lLh-VR-XAX"/>
-                                                <constraint firstItem="f9T-zx-Jh9" firstAttribute="top" secondItem="nJX-lO-Cd1" secondAttribute="bottom" constant="10" id="mAL-uk-M6S"/>
+                                                <constraint firstItem="f9T-zx-Jh9" firstAttribute="top" secondItem="nJX-lO-Cd1" secondAttribute="bottom" constant="5" id="mAL-uk-M6S"/>
                                                 <constraint firstItem="pSM-DM-uvB" firstAttribute="top" secondItem="agb-lX-dbo" secondAttribute="bottom" constant="10" id="n3F-z5-IOG"/>
                                                 <constraint firstAttribute="trailing" secondItem="nJX-lO-Cd1" secondAttribute="trailing" constant="20" id="pam-Pr-vMR"/>
                                                 <constraint firstItem="FYL-QW-Ndv" firstAttribute="top" secondItem="PQI-rZ-Myk" secondAttribute="bottom" constant="15" id="qHP-ZZ-PnJ"/>

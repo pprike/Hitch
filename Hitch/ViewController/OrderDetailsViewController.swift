@@ -125,7 +125,7 @@ class OrderDetailsViewController: UIViewController
                 
                 if let document = document, document.exists {
                     self.userNametxtF.text = (document.get("name") as! String);
-                    self.userEmailTxtF.text = (document.get("phone") as! String);
+                    self.userEmailTxtF.text = (document.get("phone") as? String ?? "nan");
                 
                     let image = document.get("profilePic") as! String;
                     if image.isEmpty != true{

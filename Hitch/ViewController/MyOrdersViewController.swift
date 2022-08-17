@@ -134,22 +134,32 @@ extension MyOrdersViewController: UITableViewDelegate, UITableViewDataSource {
         
         var btnStatusTitle : String = "Pending"
         var btnColor : UIColor
+        var config = UIButton.Configuration.filled()
+        config.cornerStyle = .medium
         
-        btnColor = UIColor.systemRed
-        let orderStatus = self.orders[indexPath.row].orderStatus!
+
+        
+        btnColor = UIColor.systemGray
+        let orderStatus = self.orders[indexPath.row].orderStatus;
         
         if ( orderStatus == Constants.orderAssigned) {
             btnStatusTitle = "Assigned"
-            btnColor = UIColor.systemGreen
+            btnColor = UIColor.systemYellow
         } else if ( orderStatus == Constants.orderPickedUp) {
             btnStatusTitle = "Picked"
-            btnColor = UIColor.systemYellow
+            btnColor = UIColor.systemGreen
         } else if ( orderStatus == Constants.orderComplete) {
-            btnStatusTitle = "Completed"
+            btnStatusTitle = "Delivered"
             btnColor = UIColor.systemBlue
         }
         
+        
         cell.orderStatusTag?.setTitle(btnStatusTitle, for: .normal)
+//        cell.orderStatusTag?.backgroundColor = btnColor;
+        config.baseBackgroundColor = btnColor;
+        
+//        config.baseForegroundColor = btnColor;
+        cell.orderStatusTag?.configuration = config
 
         switch self.orders[indexPath.row].packageDetails?.category{
         case Constants.documents:
